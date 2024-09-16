@@ -1,17 +1,15 @@
 import { TaskEntity } from "@/entities/TaskEntity";
+import { TaskStatus } from "@/enums/task-status.enum";
 import { api } from "@/services/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-interface CreateTaskRequest {
-  name: string;
-  description: string;
-  user_id: string;
-}
-
-export function useCreateTask() {
+export function useFinishTask() {
   const queryClient = useQueryClient();
-  const CreateTaskFn = async (data: CreateTaskRequest) => {
-    const { data: task } = await api.post<TaskEntity>("task", data);
+
+  const FinishTaskFn = async (id: string) => {
+    const { data: task } = await api.patch<TaskEntity>(`task/${id}`, {
+      status: TaskStatus.DONE,
+    });
 
     queryClient.invalidateQueries({ queryKey: ["tasks"] });
 
@@ -19,6 +17,6 @@ export function useCreateTask() {
   };
 
   return useMutation({
-    mutationFn: CreateTaskFn,
+    mutationFn: FinishTaskFn,
   });
 }
