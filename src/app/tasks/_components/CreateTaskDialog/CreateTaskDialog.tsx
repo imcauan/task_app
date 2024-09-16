@@ -9,7 +9,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
-import { useGetMembershipByUserId } from "@/hooks/membership/useGetMembershipByUserId";
 import { useCreateTask } from "@/hooks/tasks/useCreateTask";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
@@ -22,24 +21,11 @@ const formSchema = z.object({
   description: z.string().min(1, { message: "Description cannot be empty!" }),
 });
 
-/*
-  name: string;
-  description: string;
-  status: TTaskStatus;
-  members: Membership[];
-  workspace_id: string;
-*/
-
 interface CreateTaskDialogProps {
-  workspaceId: string;
   userId: string;
 }
 
-export function CreateTaskDialog({
-  workspaceId,
-  userId,
-}: CreateTaskDialogProps) {
-  const { data: membership } = useGetMembershipByUserId(userId);
+export function CreateTaskDialog({ userId }: CreateTaskDialogProps) {
   const { mutateAsync: CreateTaskFn } = useCreateTask();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,8 +39,7 @@ export function CreateTaskDialog({
     await CreateTaskFn({
       name: data.name,
       description: data.description,
-      workspace_id: workspaceId,
-      membershipId: membership?.id,
+      user_id: userId,
     });
   };
 

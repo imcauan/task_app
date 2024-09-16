@@ -5,7 +5,6 @@ import { CreateTaskDialog } from "../CreateTaskDialog/CreateTaskDialog";
 interface TaskTypeProps extends React.ComponentProps<"div"> {
   title: string;
   type: TaskStatus;
-  workspaceId: string;
   userId: string;
 }
 
@@ -14,10 +13,7 @@ export function TaskType({ title, ...props }: TaskTypeProps) {
     <div className="flex min-w-64 items-center justify-between p-3 border gap-2">
       <h1>{title}</h1>
       {props.type === TaskStatus.TODO && (
-        <CreateTaskDialog
-          userId={props.userId}
-          workspaceId={props.workspaceId}
-        />
+        <CreateTaskDialog userId={props.userId} />
       )}
     </div>
   );
