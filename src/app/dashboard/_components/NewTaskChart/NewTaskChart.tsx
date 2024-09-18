@@ -31,7 +31,7 @@ export function NewTaskChart() {
   const { data: chartData } = useGetNewTaskChartData(user?.id!);
 
   return (
-    <Card>
+    <Card className="rounded-none">
       <CardHeader>
         <CardTitle>New tasks.</CardTitle>
       </CardHeader>
