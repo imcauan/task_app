@@ -12,7 +12,7 @@ export default function Page() {
   const { data: tasks } = useGetTasks();
 
   return (
-    <div className="w-full h-screen flex">
+    <div className="w-full h-screen flex dark:bg-black">
       <Sidebar />
       <div className="flex px-10 mt-10 w-full">
         <TaskList

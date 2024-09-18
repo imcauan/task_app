@@ -18,7 +18,7 @@ import { FaCirclePlus } from "react-icons/fa6";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name cannot be empty!" }),
-  description: z.string().min(1, { message: "Description cannot be empty!" }),
+  description: z.string(),
 });
 
 interface CreateTaskDialogProps {
@@ -48,7 +48,7 @@ export function CreateTaskDialog({ userId }: CreateTaskDialogProps) {
       <DialogTrigger className="font-semibold text-sm">
         <FaCirclePlus />
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="dark:bg-black">
         <DialogHeader>
           <DialogTitle>Create a new task</DialogTitle>
         </DialogHeader>
@@ -68,7 +68,7 @@ export function CreateTaskDialog({ userId }: CreateTaskDialogProps) {
             />
             <div className="w-full flex justify-end gap-4">
               <DialogClose>
-                <Button variant={"outline"}>Cancelar</Button>
+                <Button variant={"link"}>Cancelar</Button>
               </DialogClose>
               <DialogClose>
                 <Button type="submit">Salvar</Button>

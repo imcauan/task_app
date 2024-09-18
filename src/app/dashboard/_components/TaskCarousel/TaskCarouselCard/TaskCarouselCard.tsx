@@ -19,7 +19,9 @@ export function TaskCarouselCard({
 
   return (
     <Card className="p-4 rounded-none min-w-64 grid grid-cols-1 gap-4">
-      <CardTitle className="text-sm font-normal">{task.name}</CardTitle>
+      <CardTitle className="text-sm font-normal dark:text-white">
+        {task.name}
+      </CardTitle>
       <CardContent className="">
         <div className="w-full flex justify-end items-center">
           <Button

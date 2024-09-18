@@ -27,7 +27,7 @@ export default function Page() {
   );
 
   return (
-    <div className="w-full h-full flex">
+    <div className="w-full h-full flex dark:bg-black">
       <Sidebar />
       <div className="w-full h-full grid grid-cols-1 px-10 mt-10 space-y-4 gap-4">
         <h1>

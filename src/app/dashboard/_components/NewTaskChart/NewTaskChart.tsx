@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/chart";
 import { useGetNewTaskChartData } from "@/hooks/tasks/useGetNewTaskChartData";
 import { useAuthContext } from "@/hooks/useAuthContext";
+import { useTheme } from "next-themes";
 import React from "react";
 import { HiTrendingUp } from "react-icons/hi";
 import { BarChart, CartesianGrid, XAxis, Bar } from "recharts";
@@ -29,6 +30,7 @@ const chartConfig = {
 export function NewTaskChart() {
   const { user } = useAuthContext();
   const { data: chartData } = useGetNewTaskChartData(user?.id!);
+  const { theme } = useTheme();
 
   return (
     <Card className="rounded-none">
@@ -50,7 +52,10 @@ export function NewTaskChart() {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="tasks" fill="#000000" radius={8} />
+            <Bar
+              dataKey="tasks"
+              fill={theme === "dark" ? "#ffffff" : "#000000"}
+            />
           </BarChart>
         </ChartContainer>
       </CardContent>
