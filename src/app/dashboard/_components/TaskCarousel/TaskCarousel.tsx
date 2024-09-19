@@ -15,14 +15,14 @@ export function TaskCarousel({ tasks }: TaskCarouselProps) {
   const { mutateAsync: FinishTaskFn } = useFinishTask();
   return (
     <Carousel
-      className="flex max-w-md"
+      className="flex max-w-full"
       plugins={[
         Autoplay({
           delay: 5000,
         }),
       ]}
     >
-      <CarouselContent className="flex w-full gap-4">
+      <CarouselContent className="flex max-w-xl gap-4 px-4">
         {tasks.map((task) => (
           <TaskCarouselCard task={task} finishTaskFn={FinishTaskFn} />
         ))}

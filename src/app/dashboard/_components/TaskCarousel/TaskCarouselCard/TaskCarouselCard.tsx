@@ -25,7 +25,7 @@ export function TaskCarouselCard({
       <CardContent className="">
         <div className="w-full flex justify-end items-center">
           <Button
-            className="hover:bg-transparent hover:text-black shadow-none"
+            className="hover:bg-transparent hover:text-black shadow-none rounded-none"
             onClick={handleFinishTask}
           >
             Finish
