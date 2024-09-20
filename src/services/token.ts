@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 
 export class TokenService {
-  static readonly keyAccessToken = "access_token_wang";
+  static readonly keyAccessToken = "access_token_taskapp";
 
   static saveAccessToken(token: string) {
     return Cookies.set(this.keyAccessToken, token);
