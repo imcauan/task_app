@@ -1,8 +1,8 @@
 import { api } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetNewTaskChartData(user_id: string) {
-  const GetNewTaskChartDataFn = async () => {
+export function useGetCompletedTaskChartData(user_id: string) {
+  const GetCompletedTaskChartDataFn = async () => {
     const { data } = await api.get(`task/chart/${user_id}`);
 
     return data;
@@ -10,6 +10,6 @@ export function useGetNewTaskChartData(user_id: string) {
 
   return useQuery({
     queryKey: ["chartTasks"],
-    queryFn: GetNewTaskChartDataFn,
+    queryFn: GetCompletedTaskChartDataFn,
   });
 }
