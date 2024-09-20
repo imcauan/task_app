@@ -1,4 +1,4 @@
-import { TaskStatus } from "@/enums/task-status.enum";
+import { TaskStatus } from "@/app/tasks/enums/task-status.enum";
 import { MembershipEntity } from "./MembershipEntity";
 import { WorkspaceEntity } from "./WorkspaceEntity";
 

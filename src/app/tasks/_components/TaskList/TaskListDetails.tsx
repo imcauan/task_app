@@ -7,12 +7,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { TaskEntity } from "@/entities/TaskEntity";
-import { TaskStatus } from "@/enums/task-status.enum";
-import { useDeleteTask } from "@/hooks/tasks/useDeleteTask";
-import { useFinishTask } from "@/hooks/tasks/useFinishTask";
-import { useStartTask } from "@/hooks/tasks/useStartTask";
-import { useGetUserById } from "@/hooks/user/useGetUserById";
+import { TaskEntity } from "@/shared/tasks/interfaces/TaskEntity";
+import { TaskStatus } from "@/shared/tasks/enums/task-status.enum";
+import { useDeleteTask } from "@/shared/tasks/hooks/useDeleteTask";
+import { useFinishTask } from "@/shared/tasks/hooks/useFinishTask";
+import { useStartTask } from "@/shared/tasks/hooks/useStartTask";
 import React from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 

@@ -1,5 +1,5 @@
-import { TaskEntity } from "@/entities/TaskEntity";
-import { TaskStatus } from "@/enums/task-status.enum";
+import { TaskEntity } from "../interfaces/TaskEntity";
+import { TaskStatus } from "../enums/task-status.enum";
 import { api } from "@/services/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 

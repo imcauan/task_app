@@ -1,9 +1,10 @@
 "use client";
 
 import { TaskType } from "../TaskType/TaskType";
-import { TaskStatus } from "@/enums/task-status.enum";
-import { TaskEntity } from "@/entities/TaskEntity";
+import { TaskStatus } from "@/shared/tasks/enums/task-status.enum";
+import { TaskEntity } from "@/shared/tasks/interfaces/TaskEntity";
 import { TaskListDetails } from "./TaskListDetails";
+import React from "react";
 
 export interface TaskListProps {
   userId: string;
@@ -13,18 +14,26 @@ export interface TaskListProps {
 }
 
 export function TaskList({ tasks, type, ...props }: TaskListProps) {
+  const [canOpen, setCanOpen] = React.useState<boolean>(true);
   const filteredTasks = tasks?.filter((t) => t.status === type);
 
   return (
-    <div className="grid grid-cols-1 gap-2 p-2 place-items-center">
-      <TaskType title={props.title} type={type} userId={props.userId} />
+    <div className="flex flex-col gap-2 p-2 place-items-center">
+      <TaskType
+        title={props.title}
+        type={type}
+        userId={props.userId}
+        canOpen={canOpen}
+        setCanOpen={setCanOpen}
+      />
       <div className="flex flex-col gap-2 w-full items-center">
-        {filteredTasks?.map((t) => (
-          <p className="w-full flex items-center justify-between text-left border rounded-md p-3">
-            {t.name}
-            <TaskListDetails task={t} />
-          </p>
-        ))}
+        {canOpen &&
+          filteredTasks?.map((t) => (
+            <p className="w-full flex items-center justify-between text-left border rounded-md p-3 max-w-64">
+              {t.name}
+              <TaskListDetails task={t} />
+            </p>
+          ))}
       </div>
     </div>
   );

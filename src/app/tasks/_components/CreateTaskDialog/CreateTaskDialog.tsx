@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
-import { useCreateTask } from "@/hooks/tasks/useCreateTask";
+import { useCreateTask } from "@/shared/tasks/hooks/useCreateTask";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
