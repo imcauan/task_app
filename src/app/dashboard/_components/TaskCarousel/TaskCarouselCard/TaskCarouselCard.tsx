@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { TaskEntity } from "@/entities/TaskEntity";
+import { TaskEntity } from "@/shared/tasks/interfaces/TaskEntity";
 import { UseMutateAsyncFunction } from "@tanstack/react-query";
 import React from "react";
 
@@ -18,7 +18,7 @@ export function TaskCarouselCard({
   };
 
   return (
-    <Card className="p-4 rounded-none min-w-64 grid grid-cols-1 gap-4">
+    <Card className="p-4 rounded-none w-80 h-32 grid grid-cols-1 gap-4">
       <CardTitle className="text-sm font-normal dark:text-white">
         {task.name}
       </CardTitle>

@@ -1,16 +1,15 @@
 "use client";
 
-import { useAuthContext } from "@/hooks/useAuthContext";
+import { useAuthContext } from "@/shared/auth/hooks/useAuthContext";
 import React from "react";
 import { DashboardCard } from "./_components/DashboardCard/DashboardCard";
 import { FaCheck, FaPlus } from "react-icons/fa";
 import { Sidebar } from "@/components/common/Sidebar/Sidebar";
-import { useGetTasks } from "@/hooks/tasks/useGetTasks";
-import { TaskStatus } from "@/enums/task-status.enum";
-import { NewTaskChart } from "./_components/NewTaskChart/NewTaskChart";
+import { useGetTasks } from "@/shared/tasks/hooks/useGetTasks";
+import { TaskStatus } from "@/shared/tasks/enums/task-status.enum";
 import { TaskCarousel } from "./_components/TaskCarousel/TaskCarousel";
-import { MdNavigateNext } from "react-icons/md";
-import Link from "next/link";
+import { UpcomingTasksHeader } from "./_components/UpcomingTasksHeader/UpcomingTasksHeader";
+import { CompletedTaskChart } from "./_components/CompletedTaskChart/CompletedTaskChart";
 
 export default function Page() {
   const { user } = useAuthContext();
@@ -45,21 +44,14 @@ export default function Page() {
             number={tasks?.length!}
           />
         </div>
-        <div className="max-w-96">
-          <NewTaskChart />
-        </div>
-        <div className="flex flex-col justify-center gap-3">
-          <div className="flex items-center gap-4">
-            <h1 className="">Upcoming tasks.</h1>
-            <Link
-              href="/tasks"
-              className="flex items-center text-sm border p-1 bg-black text-white rounded"
-            >
-              <p>View all</p>
-              <MdNavigateNext className="text-lg hover:border-b border-b-black" />
-            </Link>
+        <div className="w-full flex gap-6">
+          <div className="flex flex-col gap-4 min-w-96">
+            <CompletedTaskChart />
           </div>
-          <TaskCarousel tasks={onProgressTasks ?? []} />
+          <div className="flex flex-col gap-4 border p-3">
+            <UpcomingTasksHeader />
+            <TaskCarousel tasks={onProgressTasks ?? []} />
+          </div>
         </div>
       </div>
     </div>
