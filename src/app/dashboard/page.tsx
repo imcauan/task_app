@@ -1,21 +1,19 @@
 "use client";
 
-import { useAuthContext } from "@/shared/auth/hooks/useAuthContext";
 import React from "react";
 import { DashboardCard } from "./_components/DashboardCard/DashboardCard";
 import { FaCheck, FaPlus } from "react-icons/fa";
 import { Sidebar } from "@/components/common/Sidebar/Sidebar";
-import { useGetTasks } from "@/shared/tasks/hooks/useGetTasks";
 import { TaskStatus } from "@/shared/tasks/enums/task-status.enum";
 import { TaskCarousel } from "./_components/TaskCarousel/TaskCarousel";
 import { UpcomingTasksHeader } from "./_components/UpcomingTasksHeader/UpcomingTasksHeader";
 import { CompletedTaskChart } from "./_components/CompletedTaskChart/CompletedTaskChart";
+import { useUser } from "@/shared/auth/hooks/useUser";
+import { useGetUserTasks } from "@/shared/tasks/hooks/useGetUserTasks";
 
 export default function Page() {
-  const { user } = useAuthContext();
-  const { data: tasks } = useGetTasks();
-
-  console.log(tasks);
+  const { data: user } = useUser();
+  const { data: tasks } = useGetUserTasks(user?.id!);
 
   const completedTasks = tasks?.filter(
     (task) => task.status === TaskStatus.DONE

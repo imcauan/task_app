@@ -14,6 +14,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { useAuthContext } from "@/shared/auth/hooks/useAuthContext";
+import { useUser } from "@/shared/auth/hooks/useUser";
 import { useGetCompletedTaskChartData } from "@/shared/tasks/hooks/useGetCompletedTaskChartData";
 import { useTheme } from "next-themes";
 import React from "react";
@@ -27,7 +28,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function CompletedTaskChart() {
-  const { user } = useAuthContext();
+  const { data: user } = useUser();
   const { data: chartData } = useGetCompletedTaskChartData(user?.id!);
   const { theme } = useTheme();
 

@@ -3,10 +3,13 @@
 import { FormInput } from "@/components/common/FormInput";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { useAuthContext } from "@/hooks/useAuthContext";
+import { useSignIn } from "@/shared/auth/hooks/useSignIn";
+import { useUser } from "@/shared/auth/hooks/useUser";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { FaTasks } from "react-icons/fa";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -15,7 +18,8 @@ const formSchema = z.object({
 });
 
 export default function Page() {
-  const { login } = useAuthContext();
+  // const { login } = useAuthContext();
+  const { mutateAsync: SignInFn } = useSignIn();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -25,12 +29,16 @@ export default function Page() {
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    await login(data.email, data.password);
+    await SignInFn(data);
   };
 
   return (
     <div className="w-full h-dvh lg:h-screen flex flex-col justify-center items-center gap-4">
       <div className="text-center">
+        <div className="flex justify-center w-full items-center gap-2 text-lg">
+          <FaTasks />
+          <p className="font-semibold">TaskApp</p>
+        </div>
         <h1 className="text-xl font-semibold">Welcome back!</h1>
         <p className="text-base font-semibold text-neutral-400">
           Login to keep your team updated!
