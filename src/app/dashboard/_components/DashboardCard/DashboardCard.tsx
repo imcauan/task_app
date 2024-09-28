@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React from "react";
 import { IconType } from "react-icons/lib";
 
-interface DashboardCardProps extends React.ComponentProps<"div"> {
+export interface DashboardCardProps extends React.ComponentProps<"div"> {
   icon?: IconType;
   title: string;
   number: number;

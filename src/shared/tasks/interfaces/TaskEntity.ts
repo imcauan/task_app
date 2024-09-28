@@ -1,6 +1,5 @@
-import { TaskStatus } from "@/app/tasks/enums/task-status.enum";
-import { MembershipEntity } from "./MembershipEntity";
-import { WorkspaceEntity } from "./WorkspaceEntity";
+import { WorkspaceEntity } from "@/shared/workspaces/interfaces/WorkspaceEntity";
+import { TaskStatus } from "@/shared/tasks/enums/task-status.enum";
 
 export interface TaskEntity {
   id: string;
@@ -8,5 +7,5 @@ export interface TaskEntity {
   description: string;
   status: TaskStatus;
   workspace: WorkspaceEntity;
-  Membership: MembershipEntity;
+  workspaceId: string;
 }

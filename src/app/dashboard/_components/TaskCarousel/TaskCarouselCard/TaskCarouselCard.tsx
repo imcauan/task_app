@@ -1,12 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { DeleteTaskRequest } from "@/shared/tasks/hooks/useDeleteTask";
 import { TaskEntity } from "@/shared/tasks/interfaces/TaskEntity";
-import { UseMutateAsyncFunction } from "@tanstack/react-query";
+import {
+  UseMutateAsyncFunction,
+  UseMutationResult,
+} from "@tanstack/react-query";
 import React from "react";
+import { TaskHasWorkspace } from "./TaskHasWorkspace";
 
 interface TaskCarouselCardProps {
   task: TaskEntity;
-  finishTaskFn: UseMutateAsyncFunction<TaskEntity, Error, string, unknown>;
+  finishTaskFn: UseMutateAsyncFunction<
+    TaskEntity,
+    Error,
+    DeleteTaskRequest,
+    unknown
+  >;
 }
 
 export function TaskCarouselCard({
@@ -14,13 +24,19 @@ export function TaskCarouselCard({
   finishTaskFn,
 }: TaskCarouselCardProps) {
   const handleFinishTask = async () => {
-    await finishTaskFn(task.id);
+    await finishTaskFn({
+      id: task.id,
+      workspaceId: task.workspaceId,
+    });
   };
 
   return (
     <Card className="p-4 rounded-none w-80 h-32 grid grid-cols-1 gap-4">
       <CardTitle className="text-sm font-normal dark:text-white">
         {task.name}
+        {task.workspaceId && (
+          <TaskHasWorkspace workspaceId={task.workspaceId} />
+        )}
       </CardTitle>
       <CardContent className="">
         <div className="w-full flex justify-end items-center">

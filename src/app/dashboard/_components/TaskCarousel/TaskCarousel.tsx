@@ -25,7 +25,11 @@ export function TaskCarousel({ tasks }: TaskCarouselProps) {
     >
       <CarouselContent className="flex max-w-lg gap-6 p-4 max-h-40 items-center">
         {tasks.map((task) => (
-          <TaskCarouselCard task={task} finishTaskFn={FinishTaskFn} />
+          <TaskCarouselCard
+            key={task.id}
+            task={task}
+            finishTaskFn={FinishTaskFn}
+          />
         ))}
       </CarouselContent>
     </Carousel>
