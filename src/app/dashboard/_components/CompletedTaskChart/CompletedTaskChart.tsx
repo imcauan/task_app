@@ -36,7 +36,7 @@ export function CompletedTaskChart({ user }: CompletedTaskChartProps) {
   const { theme } = useTheme();
 
   return (
-    <Card className="rounded-none">
+    <Card className="rounded-none max-w-96">
       <CardHeader className="flex flex-col">
         <CardTitle>Completed tasks.</CardTitle>
         <CardDescription>January - December.</CardDescription>

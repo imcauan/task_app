@@ -10,7 +10,7 @@ export interface DashboardCardProps extends React.ComponentProps<"div"> {
 
 export function DashboardCard({ title, number, ...props }: DashboardCardProps) {
   return (
-    <Card className="max-w-64 flex items-center justify-between rounded-none">
+    <Card className="flex min-w-64 items-center justify-between rounded-none">
       <CardHeader className="w-full flex items-center gap-2">
         <div className="p-1 text-sm">
           {props.icon !== undefined && <props.icon />}

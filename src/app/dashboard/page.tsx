@@ -12,6 +12,8 @@ import { TaskCarousel } from "./_components/TaskCarousel/TaskCarousel";
 import { UpcomingTasksHeader } from "./_components/UpcomingTasksHeader/UpcomingTasksHeader";
 import { CompletedTaskChart } from "./_components/CompletedTaskChart/CompletedTaskChart";
 import { useUser } from "@/shared/auth/hooks/useUser";
+import { DashboardCarousel } from "@/components/mobile/dashboard/dashboard-carousel";
+import { Bottombar } from "@/components/mobile/Bottombar/bottom-bar";
 
 export default function Page() {
   const { isLoading, data: user } = useUser();
@@ -38,40 +40,27 @@ export default function Page() {
   ];
 
   return (
-    <div className="w-full h-full flex dark:bg-black">
+    <div className="w-full h-full flex dark:bg-black overflow-hidden">
       {isLoading ? (
         <div className="w-full h-full">
           <Sidebar />
           <h1>Loading...</h1>
         </div>
       ) : (
-        <>
+        <div className="flex flex-col lg:flex-row h-screen w-full overflow-y-auto">
           <Sidebar />
-          <div className="w-full h-full grid grid-cols-1 px-4 mt-10 space-y-4 gap-4">
-            <h1>
-              Hello, <strong>{user?.name}</strong>.
-            </h1>
-            <div className="w-full flex h-full gap-4">
-              {cardData.map((data) => (
-                <DashboardCard
-                  key={data.title}
-                  title={data.title}
-                  icon={data.icon}
-                  number={data.number}
-                />
-              ))}
-            </div>
-            <div className="w-full flex gap-6">
-              <div className="flex flex-col gap-4 min-w-96">
-                <CompletedTaskChart user={user!} />
-              </div>
-              <div className="flex flex-col gap-4 p-3">
+          <div className="w-full h-full flex flex-col overflow-auto px-4 mt-10">
+            <div className="mt-4 flex flex-col">
+              <DashboardCarousel completedTasks={completedTasks} user={user!} />
+              <div className="flex flex-col gap-4 w-full py-3">
                 <UpcomingTasksHeader />
                 <TaskCarousel tasks={onProgressTasks ?? []} />
               </div>
+              <CompletedTaskChart user={user!} />
             </div>
           </div>
-        </>
+          <Bottombar />
+        </div>
       )}
     </div>
   );

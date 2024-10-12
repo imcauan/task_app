@@ -31,7 +31,7 @@ export function TaskCarouselCard({
   };
 
   return (
-    <Card className="p-4 rounded-none w-80 h-32 grid grid-cols-1 gap-4">
+    <Card className="p-4 rounded-none w-full h-32 grid grid-cols-1 gap-4">
       <CardTitle className="text-sm font-normal dark:text-white">
         {task.name}
         {task.workspaceId && (
