@@ -3,6 +3,7 @@ import { TokenService } from "@/services/token";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { TAccessToken } from "../types/TAccessToken";
+import { createStripeCustomer } from "@/services/stripe";
 
 export interface SignInRequest {
   email: string;
