@@ -1,10 +1,8 @@
 import { api } from "@/services/api";
-import { UserEntity } from "../interfaces/UserEntity";
+import { UserEntity } from "@/shared/user/types/user.entity";
+import { GetUserByStripeDataRequest } from "@/shared/user/types/get-user-by-stripe-data-request.interface";
 
-interface GetUserByStripeDataRequest {
-  stripeCustomerId: string;
-  stripeSubscriptionId: string;
-}
+//TODO: verify if it's not useless.
 
 export function useGetUserByStripeData() {
   const GetUserByStripeDataFn = async (data: GetUserByStripeDataRequest) => {
