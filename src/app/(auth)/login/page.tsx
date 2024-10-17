@@ -1,16 +1,15 @@
 "use client";
 
+import Link from "next/link";
+
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { FaTasks } from "react-icons/fa";
+import { useSignIn } from "@/shared/auth/hooks/sign-in.hook";
 import { FormInput } from "@/components/common/FormInput";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { useSignIn } from "@/shared/auth/hooks/useSignIn";
-import { useUser } from "@/shared/auth/hooks/useUser";
-
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { FaTasks } from "react-icons/fa";
-import { z } from "zod";
 
 const formSchema = z.object({
   email: z.string().email("Email is invalid"),
@@ -18,7 +17,6 @@ const formSchema = z.object({
 });
 
 export default function Page() {
-  // const { login } = useAuthContext();
   const { mutateAsync: SignInFn } = useSignIn();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,7 +31,7 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full h-dvh lg:h-screen flex flex-col justify-center items-center gap-4">
+    <div className="w-full h-dvh lg:h-screen dark:bg-black flex flex-col justify-center items-center gap-4">
       <div className="text-center">
         <div className="flex justify-center w-full items-center gap-2 text-lg">
           <FaTasks />

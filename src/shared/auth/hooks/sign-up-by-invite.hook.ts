@@ -3,11 +3,12 @@ import { api } from "@/services/api";
 import { TokenService } from "@/services/token";
 import { useMutation } from "@tanstack/react-query";
 import { TAccessToken } from "@/shared/auth/types/TAccessToken";
+import { SignUpRequest } from "@/shared/auth/types/sign-up-request.interface";
 import { SignUpByInviteRequest } from "../types/sign-up-by-invite-request.interface";
 
-export function useSignUp() {
+export function useSignUpByInvite() {
   const router = useRouter();
-  const signUpFn = async (data: SignUpByInviteRequest) => {
+  const SignUpByInviteFn = async (data: SignUpByInviteRequest) => {
     const { data: response } = await api.post<TAccessToken>(
       "/auth/signup",
       data
@@ -17,7 +18,7 @@ export function useSignUp() {
   };
 
   return useMutation({
-    mutationFn: signUpFn,
+    mutationFn: SignUpByInviteFn,
     onSuccess: () => {
       router.push("/dashboard");
     },

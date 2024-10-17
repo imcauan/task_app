@@ -3,10 +3,11 @@
 import { FormInput } from "@/components/common/FormInput";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { useAuthContext } from "@/shared/auth/hooks/useAuthContext";
-import { useSignUp } from "@/shared/auth/hooks/useSignUp";
+import { useSignUpByInvite } from "@/shared/auth/hooks/sign-up-by-invite.hook";
+import { useSignUp } from "@/shared/auth/hooks/sign-up.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { FaTasks } from "react-icons/fa";
 import { z } from "zod";
@@ -18,7 +19,12 @@ const formSchema = z.object({
 });
 
 export default function Page() {
+  const searchParams = useSearchParams();
+  const workspaceId = searchParams.get("workspaceId");
+
   const { mutateAsync: SignUpFn } = useSignUp();
+  const { mutateAsync: SignUpByInviteFn } = useSignUpByInvite();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,11 +35,15 @@ export default function Page() {
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    if (workspaceId) {
+      await SignUpByInviteFn({ ...data, workspaceId });
+    }
+
     await SignUpFn(data);
   };
 
   return (
-    <div className="w-full h-dvh lg:h-screen flex flex-col justify-center items-center gap-4">
+    <div className="w-full h-dvh lg:h-screen dark:bg-black flex flex-col justify-center items-center gap-4">
       <div className="text-center">
         <div className="flex justify-center w-full items-center gap-2 text-lg">
           <FaTasks />
