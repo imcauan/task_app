@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
-import { useCreateTask } from "@/shared/tasks/hooks/useCreateTask";
+import { useCreateTask } from "@/shared/tasks/hooks/create-task.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -21,11 +21,18 @@ const formSchema = z.object({
   description: z.string(),
 });
 
-interface CreateTaskDialogProps {
+interface CreateTaskDialogProps extends React.ComponentProps<"dialog"> {
   userId: string;
+  columnId: string;
+  workspaceId?: string;
 }
 
-export function CreateTaskDialog({ userId }: CreateTaskDialogProps) {
+export function CreateTaskDialog({
+  userId,
+  workspaceId,
+  columnId,
+  ...props
+}: CreateTaskDialogProps) {
   const { mutateAsync: CreateTaskFn } = useCreateTask();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,13 +47,16 @@ export function CreateTaskDialog({ userId }: CreateTaskDialogProps) {
       name: data.name,
       description: data.description,
       user_id: userId,
+      workspaceId,
+      columnId,
     });
   };
 
   return (
-    <Dialog>
-      <DialogTrigger className="font-semibold text-sm">
+    <Dialog {...props}>
+      <DialogTrigger className="font-semibold text-sm flex items-center gap-3">
         <FaCirclePlus />
+        Create a new task
       </DialogTrigger>
       <DialogContent className="dark:bg-black">
         <DialogHeader>
