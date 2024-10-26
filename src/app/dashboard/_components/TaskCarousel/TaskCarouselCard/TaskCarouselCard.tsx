@@ -1,35 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { DeleteTaskRequest } from "@/shared/tasks/hooks/useDeleteTask";
-import { TaskEntity } from "@/shared/tasks/interfaces/TaskEntity";
-import {
-  UseMutateAsyncFunction,
-  UseMutationResult,
-} from "@tanstack/react-query";
+import { TaskEntity } from "@/shared/tasks/types/task.entity";
 import React from "react";
 import { TaskHasWorkspace } from "./TaskHasWorkspace";
 
 interface TaskCarouselCardProps {
   task: TaskEntity;
-  finishTaskFn: UseMutateAsyncFunction<
-    TaskEntity,
-    Error,
-    DeleteTaskRequest,
-    unknown
-  >;
 }
 
-export function TaskCarouselCard({
-  task,
-  finishTaskFn,
-}: TaskCarouselCardProps) {
-  const handleFinishTask = async () => {
-    await finishTaskFn({
-      id: task.id,
-      workspaceId: task.workspaceId,
-    });
-  };
-
+export function TaskCarouselCard({ task }: TaskCarouselCardProps) {
   return (
     <Card className="p-4 rounded-none w-full h-32 grid grid-cols-1 gap-4">
       <CardTitle className="text-sm font-normal dark:text-white">
@@ -40,10 +19,7 @@ export function TaskCarouselCard({
       </CardTitle>
       <CardContent className="">
         <div className="w-full flex justify-end items-center">
-          <Button
-            className="hover:bg-transparent hover:text-black shadow-none rounded-none"
-            onClick={handleFinishTask}
-          >
+          <Button className="hover:bg-transparent hover:text-black shadow-none rounded-none">
             Finish
           </Button>
         </div>

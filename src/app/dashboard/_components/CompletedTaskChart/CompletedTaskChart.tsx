@@ -13,9 +13,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useUser } from "@/shared/auth/hooks/useUser";
-import { useGetCompletedTaskChartData } from "@/shared/tasks/hooks/useGetCompletedTaskChartData";
-import { UserEntity } from "@/shared/user/interfaces/UserEntity";
+import { useGetCreatedTaskChartData } from "@/shared/tasks/hooks/created-task-chart-data.hook";
+import { UserEntity } from "@/shared/user/types/user.entity";
 import { useTheme } from "next-themes";
 import React from "react";
 import { BarChart, CartesianGrid, XAxis, Bar } from "recharts";
@@ -32,7 +31,7 @@ interface CompletedTaskChartProps {
 }
 
 export function CompletedTaskChart({ user }: CompletedTaskChartProps) {
-  const { data: chartData } = useGetCompletedTaskChartData(user?.id!);
+  const { data: chartData } = useGetCreatedTaskChartData(user?.id!);
   const { theme } = useTheme();
 
   return (

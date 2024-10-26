@@ -5,18 +5,15 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { TaskEntity } from "@/shared/tasks/interfaces/TaskEntity";
+import { TaskEntity } from "@/shared/tasks/types/task.entity";
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { TaskCarouselCard } from "./TaskCarouselCard/TaskCarouselCard";
-import { useFinishTask } from "@/shared/tasks/hooks/useFinishTask";
-
+import { TaskCarouselCard } from "@/app/dashboard/_components/TaskCarousel/TaskCarouselCard/TaskCarouselCard";
 interface TaskCarouselProps {
   tasks: TaskEntity[];
 }
 
 export function TaskCarousel({ tasks }: TaskCarouselProps) {
-  const { mutateAsync: FinishTaskFn } = useFinishTask();
   return (
     <Carousel
       orientation="horizontal"
@@ -28,12 +25,8 @@ export function TaskCarousel({ tasks }: TaskCarouselProps) {
     >
       <CarouselContent className="flex min-w-72 gap-6 max-h-40 items-center">
         {tasks.map((task) => (
-          <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-            <TaskCarouselCard
-              key={task.id}
-              task={task}
-              finishTaskFn={FinishTaskFn}
-            />
+          <CarouselItem className="md:basis-1/2 lg:basis-1/3" key={task.id}>
+            <TaskCarouselCard key={task.id} task={task} />
           </CarouselItem>
         ))}
       </CarouselContent>

@@ -1,4 +1,4 @@
-import { useGetWorkspaceById } from "@/shared/workspaces/hooks/useGetWorkspaceById";
+import { useGetWorkspaceById } from "@/shared/workspaces/hooks/get-workspace-by-id.hook";
 import React from "react";
 
 interface TaskHasWorkspaceProps extends React.ComponentProps<"p"> {
@@ -11,5 +11,9 @@ export function TaskHasWorkspace({
 }: TaskHasWorkspaceProps) {
   const { data: workspace } = useGetWorkspaceById(workspaceId);
 
-  return <p className="text-xs">{workspace && `From ${workspace.name}`}</p>;
+  return (
+    <p {...props} className="text-xs">
+      {workspace && `From ${workspace.name}`}
+    </p>
+  );
 }
