@@ -16,25 +16,13 @@ export function LandingPageHeader({
   ...props
 }: LandingPageHeaderProps) {
   return (
-    <header
-      className="w-full h-10 flex flex-col p-8 gap-3 items-center"
-      {...props}
-    >
-      <div className="flex w-full justify-between">
-        <div className="flex gap-2 items-center px-2 text-xl">
+    <header className="w-full h-10 flex px-12 mt-10" {...props}>
+      <div className="flex w-full h-full items-center gap-8">
+        <div className="flex gap-2 items-center p-4 text-2xl">
           <FaTasks />
           <p className="font-semibold">TaskApp</p>
         </div>
         <LandingPageLinks />
-        <div className="flex gap-3 w-25">
-          <Button
-            className="bg-transparent text-black dark:text-white hover:bg-transparent shadow-none"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            {theme === "dark" ? <FaSun /> : <FaMoon />}
-          </Button>
-          <Button>Sign up</Button>
-        </div>
       </div>
     </header>
   );

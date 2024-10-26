@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function LandingPagePricing() {
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center">
+    <div className="w-full h-full flex flex-col justify-center items-center gap-6">
       <div className="flex flex-col text-center">
         <h1 className="text-3xl font-semibold">
           And all the benefits are really closer to you.

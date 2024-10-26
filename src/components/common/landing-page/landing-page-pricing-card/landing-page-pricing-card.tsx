@@ -11,7 +11,7 @@ export function LandingPagePricingCard({
   ...props
 }: LandingPagePricingCardProps) {
   return (
-    <Card className="h-60 p-4 shadow-none rounded-none" {...props}>
+    <Card className="h-80 p-4 shadow-none rounded-none" {...props}>
       <CardHeader className="w-full flex flex-col text-center">
         <CardTitle className="text-2xl">{plan.name}</CardTitle>
         <p>{plan.description}</p>
