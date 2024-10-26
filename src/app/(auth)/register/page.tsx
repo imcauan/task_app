@@ -1,6 +1,7 @@
 "use client";
 
 import { FormInput } from "@/components/common/FormInput";
+import { RoundSpinner } from "@/components/common/Spinner/spinner";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { useSignUpByInvite } from "@/shared/auth/hooks/sign-up-by-invite.hook";
@@ -8,6 +9,7 @@ import { useSignUp } from "@/shared/auth/hooks/sign-up.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { FaTasks } from "react-icons/fa";
 import { z } from "zod";
@@ -18,10 +20,8 @@ const formSchema = z.object({
   password: z.string().min(1, "Password is required"),
 });
 
-export default function Page() {
-  const searchParams = useSearchParams();
-  const workspaceId = searchParams.get("workspaceId");
-
+export default function Page({ params }: { params: { workspaceId: string } }) {
+  const { workspaceId } = params;
   const { mutateAsync: SignUpFn } = useSignUp();
   const { mutateAsync: SignUpByInviteFn } = useSignUpByInvite();
 

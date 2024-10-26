@@ -1,7 +1,7 @@
-import { MessageEntity } from "@/shared/chat/types/MessageEntity";
+import { MessageEntity } from "@/shared/chat/types/message.entity";
 import React from "react";
 import { MessageCard } from "../MessageCard/MessageCard";
-import { UserEntity } from "@/shared/user/interfaces/UserEntity";
+import { UserEntity } from "@/shared/user/types/user.entity";
 
 interface MessageListProps {
   messages: MessageEntity[];

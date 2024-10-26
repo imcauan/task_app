@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { WorkspaceEntity } from "@/shared/workspaces/hooks/types/workspace.entity";
+import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";
 import React from "react";
 
 interface WorkspaceCardProps extends React.ComponentProps<"div"> {

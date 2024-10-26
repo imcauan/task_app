@@ -1,4 +1,4 @@
-import { WorkspaceEntity } from "@/shared/workspaces/hooks/types/workspace.entity";
+import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";
 
 export interface TaskEntity {
   id: string;

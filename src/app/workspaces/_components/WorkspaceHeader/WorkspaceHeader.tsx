@@ -1,7 +1,7 @@
 "use client";
 
 import AvatarCircles from "@/components/ui/avatar-circles";
-import { WorkspaceEntity } from "@/shared/workspaces/hooks/types/workspace.entity";
+import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";
 import React from "react";
 import { AddMemberDialog } from "../AddMemberDialog/AddMemberDialog";
 import { useUser } from "@/shared/auth/hooks/user.hook";

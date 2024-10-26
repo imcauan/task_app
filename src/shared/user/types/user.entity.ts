@@ -1,7 +1,7 @@
 import { ChatEntity } from "@/shared/chat/types/chat.entity";
 import { ColumnEntity } from "@/shared/column/types/column.entity";
 import { TaskEntity } from "@/shared/tasks/types/task.entity";
-import { WorkspaceEntity } from "@/shared/workspaces/hooks/types/workspace.entity";
+import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";
 
 export interface UserEntity {
   id: string;

@@ -1,4 +1,4 @@
-import { UserEntity } from "@/shared/user/interfaces/UserEntity";
+import { UserEntity } from "@/shared/user/types/user.entity";
 import { MessageEntity } from "@/shared/chat/types/message.entity";
 
 export interface ChatEntity {
