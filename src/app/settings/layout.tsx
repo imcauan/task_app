@@ -1,6 +1,6 @@
 import "../globals.css";
 import { QueryProvider } from "@/providers/query-provider";
-import { ThemeProvider } from "@/components/common/TaskType/ThemeProvider/ThemeProvider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import { Sidebar } from "@/components/common/Sidebar/Sidebar";
 import { SettingsBar } from "./_components/SettingsBar/settings-bar";
 

@@ -2,7 +2,7 @@
 
 import { plans } from "@/components/common/landing-page/landing-page-pricing/plans";
 import { Sidebar } from "@/components/common/Sidebar/Sidebar";
-import { useUser } from "@/shared/auth/hooks/useUser";
+import { useUser } from "@/shared/auth/hooks/user.hook";
 import { SubscriptionCard } from "./_components/subscription-card";
 
 export default function Page() {

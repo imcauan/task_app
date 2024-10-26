@@ -1,6 +1,6 @@
 import "../globals.css";
 import { QueryProvider } from "@/providers/query-provider";
-import { ThemeProvider } from "@/components/common/TaskType/ThemeProvider/ThemeProvider";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 export default function WorkspaceLayout({
   children,
