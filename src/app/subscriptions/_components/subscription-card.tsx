@@ -1,9 +1,9 @@
 import { PlanEntity } from "@/components/common/landing-page/landing-page-pricing/plans";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { UserEntity } from "@/shared/user/interfaces/UserEntity";
+import { UserEntity } from "@/shared/user/types/user.entity";
 import { features } from "process";
 import { SubscriptionButton } from "./subscription-button";
-import { useCreateSubscription } from "@/shared/subscriptions/hooks/create-subscription.hook";
+import { useCreateCheckoutAction } from "@/shared/checkout/actions/create-subscription.action";
 
 interface SubscriptionCardProps extends React.ComponentProps<"div"> {
   plan: PlanEntity;
@@ -15,7 +15,14 @@ export function SubscriptionCard({
   user,
   ...props
 }: SubscriptionCardProps) {
-  const { mutate: CreateSubscriptionFn } = useCreateSubscription();
+  const { CreateCheckoutAction } = useCreateCheckoutAction();
+
+  const handleSubscriptionClick = async () => {
+    CreateCheckoutAction({
+      userEmail: user?.email,
+      userStripeSubscriptionId: user?.stripeSubscriptionId,
+    });
+  };
 
   return (
     <Card className="h-80 p-4 shadow-none rounded-none" {...props}>
@@ -35,7 +42,7 @@ export function SubscriptionCard({
           </div>
         ))}
         {plan.name !== "Free" && (
-          <SubscriptionButton onClick={() => CreateSubscriptionFn(user.id)} />
+          <SubscriptionButton onClick={handleSubscriptionClick} />
         )}
       </div>
     </Card>

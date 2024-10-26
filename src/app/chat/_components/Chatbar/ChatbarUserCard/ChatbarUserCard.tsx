@@ -1,4 +1,5 @@
-import { UserEntity } from "@/shared/user/interfaces/UserEntity";
+import { UserEntity } from "@/shared/user/types/user.entity";
+import Image from "next/image";
 
 export interface ChatbarUserCardProps {
   user: UserEntity;
@@ -8,9 +9,10 @@ export function ChatbarUserCard({ user }: ChatbarUserCardProps) {
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-2">
-        <img
+        <Image
           src={`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}`}
           className="size-8 rounded-full object-cover"
+          alt={user?.name}
         />
         <div className="flex flex-col text-left">
           <h1 className="text-sm">{user?.name}</h1>

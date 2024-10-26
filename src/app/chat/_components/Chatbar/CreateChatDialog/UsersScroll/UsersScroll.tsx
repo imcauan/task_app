@@ -23,6 +23,7 @@ export function UsersScroll({ loggedUser, users }: UsersScrollProps) {
     <ScrollArea className="w-full whitespace-nowrap  h-max rounded-none">
       {users.map((u) => (
         <UsersScrollCard
+          key={u.id}
           user={u}
           loggedUser={loggedUser}
           onClick={() => handleCreateChat(u.id)}

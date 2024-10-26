@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface LandingPageSectionProps extends React.ComponentProps<"section"> {
   title: string;
   subtitle: string;
@@ -20,8 +22,9 @@ export function LandingPageSection({
         <p className="font-light text-xl lg:px-10">{subtitle}</p>
       </div>
       <div className="flex gap-4 w-full justify-between items-center">
-        <img
+        <Image
           src={image ?? ""}
+          alt="section_image"
           className={image || "hidden"}
           width={500}
           height={500}

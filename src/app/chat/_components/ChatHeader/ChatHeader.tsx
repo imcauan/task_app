@@ -1,5 +1,6 @@
 import { Separator } from "@/components/ui/separator";
-import { UserEntity } from "@/shared/user/interfaces/UserEntity";
+import { UserEntity } from "@/shared/user/types/user.entity";
+import Image from "next/image";
 import React from "react";
 
 interface ChatHeaderProps extends React.ComponentProps<"header"> {
@@ -11,9 +12,10 @@ export function ChatHeader({ user, isTyping, ...props }: ChatHeaderProps) {
   return (
     <header className="flex flex-col w-full max-h-12" {...props}>
       <div className="flex items-center gap-2 p-4">
-        <img
+        <Image
           src={`${process.env.NEXT_PUBLIC_API_URL}/${user?.image}`}
           className="rounded-full object-cover size-8"
+          alt={user?.name}
         />
         <div>
           <h1 className="text-sm">{user?.name}</h1>

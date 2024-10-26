@@ -63,8 +63,8 @@ export default function Page() {
               placeholder="*******"
             />
             <Button type="submit">Login</Button>
-            <Link href={"/register"} className="text-center">
-              Don't you have an account?{" "}
+            <Link href="/register" className="text-center">
+              Don't you have an account?
               <span className="font-bold">Register</span>
             </Link>
           </form>
