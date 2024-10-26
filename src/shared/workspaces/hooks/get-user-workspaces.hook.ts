@@ -1,5 +1,5 @@
 import { api } from "@/services/api";
-import { WorkspaceEntity } from "@/shared/workspaces/interfaces/WorkspaceEntity";
+import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";
 import { useQuery } from "@tanstack/react-query";
 
 export function useGetUserWorkspaces(id: string) {
@@ -12,8 +12,5 @@ export function useGetUserWorkspaces(id: string) {
   return useQuery({
     queryKey: ["userWorkspaces"],
     queryFn: GetUserWorkspacesFn,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    refetchOnWindowFocus: false,
   });
 }

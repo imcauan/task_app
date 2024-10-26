@@ -1,20 +1,21 @@
 "use client";
 
-import { Sidebar } from "@/components/common/Sidebar/Sidebar";
-import { useUser } from "@/shared/auth/hooks/useUser";
+import Link from "next/link";
 import WorkspaceHomeHeader from "@/app/workspaces/_components/WorkspaceHomeHeader/WorkspaceHomeHeader";
 import { WorkspaceCard } from "@/app/workspaces/_components/WorkspaceCard/WorkspaceCard";
-import Link from "next/link";
+import { useUser } from "@/shared/auth/hooks/user.hook";
+import { Sidebar } from "@/components/common/Sidebar/Sidebar";
+import { Bottombar } from "@/components/mobile/Bottombar/bottom-bar";
 
 export default function Page() {
   const { data: user } = useUser();
 
   return (
-    <div className="dark:bg-black w-full h-dvh lg:h-screen flex items-start">
+    <div className="w-full h-full flex dark:bg-black overflow-hidden">
       <Sidebar />
-      <div className="p-4 my-6 flex flex-col gap-2">
+      <div className="flex flex-col  h-screen w-full overflow-y-auto p-4">
         <WorkspaceHomeHeader userId={user?.id} />
-        <div className="w-full grid grid-cols-3 gap-4">
+        <div className="w-full h-full flex flex-col overflow-auto gap-4 mt-4">
           {user &&
             user.workspaces.map((workspace) => (
               <Link href={`${workspace.id}`} key={workspace.id}>
@@ -22,6 +23,7 @@ export default function Page() {
               </Link>
             ))}
         </div>
+        <Bottombar />
       </div>
     </div>
   );

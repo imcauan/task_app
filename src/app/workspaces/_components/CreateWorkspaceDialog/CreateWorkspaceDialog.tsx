@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
-import { useCreateWorkspace } from "@/shared/workspaces/hooks/useCreateWorkspace";
+import { useCreateWorkspace } from "@/shared/workspaces/hooks/create-workspace.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";

@@ -1,5 +1,5 @@
 import { api } from "@/services/api";
-import { WorkspaceEntity } from "../interfaces/WorkspaceEntity";
+import { WorkspaceEntity } from "@/shared/workspaces/hooks/types/workspace.entity";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface CreateWorkspaceRequest {

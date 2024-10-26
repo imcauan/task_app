@@ -1,6 +1,6 @@
 import { api } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
-import { WorkspaceEntity } from "../interfaces/WorkspaceEntity";
+import { WorkspaceEntity } from "@/shared/workspaces/hooks/types/workspace.entity";
 
 export function useGetWorkspaceById(id: string) {
   const GetWorkspaceByIdFn = async () => {
