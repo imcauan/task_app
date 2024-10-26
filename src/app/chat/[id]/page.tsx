@@ -1,16 +1,17 @@
 "use client";
 
-import { Sidebar } from "@/components/common/Sidebar/Sidebar";
-import { Chatbar } from "../_components/Chatbar/Chatbar";
-import { useParams, useSearchParams } from "next/navigation";
-import { ChatHeader } from "./_components/ChatHeader/ChatHeader";
-import { useGetUserById } from "@/shared/user/hooks/useGetUserById";
-import { MessageInput } from "../_components/MessageInput/MessageInput";
-import { useUser } from "@/shared/auth/hooks/useUser";
-import { MessageList } from "../_components/MessageList/MessageList";
-import { io } from "socket.io-client";
 import React from "react";
-import { useGetMessagesByChatId } from "@/shared/messages/hooks/useGetMessagesByChatId";
+import { io } from "socket.io-client";
+import { useParams, useSearchParams } from "next/navigation";
+
+import { Sidebar } from "@/components/common/Sidebar/Sidebar";
+import { Chatbar } from "@/app/chat/_components/Chatbar/Chatbar";
+import { useGetUserById } from "@/shared/user/hooks/get-user-by-id.hook";
+import { MessageInput } from "@/app/chat/_components/MessageInput/MessageInput";
+import { useUser } from "@/shared/auth/hooks/user.hook";
+import { MessageList } from "@/app/chat/_components/MessageList/MessageList";
+import { useGetMessagesByChatId } from "@/shared/messages/hooks/get-messages-by-chat-id.hook";
+import { ChatHeader } from "@/app/chat/_components/ChatHeader/ChatHeader";
 
 const socket = io("http://localhost:3333");
 
@@ -26,6 +27,8 @@ export default function Page() {
 
   const [isTyping, setIsTyping] = React.useState<boolean>(false);
 
+  // TODO: handle image for messaging
+
   return (
     <div className="w-full h-dvh lg:h-screen flex dark:bg-black">
       <Sidebar />
@@ -37,7 +40,6 @@ export default function Page() {
           user={user!}
           chatId={String(chatId)}
           socket={socket}
-          isTyping={isTyping}
           setIsTyping={setIsTyping}
         />
       </div>

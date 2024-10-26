@@ -3,8 +3,7 @@
 import { Sidebar } from "@/components/common/Sidebar/Sidebar";
 import React from "react";
 import { Chatbar } from "./_components/Chatbar/Chatbar";
-import { useUser } from "@/shared/auth/hooks/useUser";
-
+import { useUser } from "@/shared/auth/hooks/user.hook";
 export default function Page() {
   const { data: user } = useUser();
 

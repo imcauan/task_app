@@ -1,9 +1,8 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { UserEntity } from "@/shared/user/interfaces/UserEntity";
+import { UserEntity } from "@/shared/user/types/user.entity";
 import React from "react";
 import { UsersScrollCard } from "./UsersScrollCard/UsersScrollCard";
-import Link from "next/link";
-import { useCreateChat } from "@/shared/chat/hooks/useCreateChat";
+import { useCreateChat } from "@/shared/chat/hooks/create-chat.hook";
 
 interface UsersScrollProps {
   users: UserEntity[];

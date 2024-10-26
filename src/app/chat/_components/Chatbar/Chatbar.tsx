@@ -3,11 +3,11 @@
 import { Input } from "@/components/ui/input";
 import React from "react";
 import { CreateChatDialog } from "./CreateChatDialog/CreateChatDialog";
-import { useGetUsers } from "@/shared/user/hooks/useGetUsers";
-import { useUser } from "@/shared/auth/hooks/useUser";
+import { useGetUsers } from "@/shared/user/hooks/get-users.hook";
 import { ChatbarUserCard } from "./ChatbarUserCard/ChatbarUserCard";
 import Link from "next/link";
-import { UserEntity } from "@/shared/user/interfaces/UserEntity";
+import { UserEntity } from "@/shared/user/types/user.entity";
+import { FaArrowLeft } from "react-icons/fa";
 
 interface ChatbarProps {
   user: UserEntity;
@@ -25,9 +25,14 @@ export function Chatbar({ user }: ChatbarProps) {
       : [];
 
   return (
-    <div className="flex flex-col px-10 min-w-80 h-full border-r gap-3">
+    <div className="flex flex-col px-10 w-full md:min-w-80 h-full border-r gap-3">
       <div className="flex w-full mt-10 items-center justify-between">
-        <h1 className=" text-base font-semibold">Chats.</h1>
+        <div className="flex gap-2 items-center">
+          <Link href="/dashboard">
+            <FaArrowLeft />
+          </Link>
+          <h1 className=" text-base font-semibold">Chats.</h1>
+        </div>
         <CreateChatDialog users={users ?? []} />
       </div>
       <Input

@@ -8,11 +8,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { UserEntity } from "@/shared/user/interfaces/UserEntity";
+import { UserEntity } from "@/shared/user/types/user.entity";
 import React from "react";
 import { FaPlus } from "react-icons/fa";
 import { UsersScroll } from "./UsersScroll/UsersScroll";
-import { useUser } from "@/shared/auth/hooks/useUser";
+import { useUser } from "@/shared/auth/hooks/user.hook";
 
 interface CreateChatDialogProps extends React.ComponentProps<"dialog"> {
   users: UserEntity[];

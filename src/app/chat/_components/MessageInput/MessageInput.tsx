@@ -2,12 +2,7 @@
 
 import { FormInput } from "@/components/common/FormInput";
 import { Form } from "@/components/ui/form";
-import { MessageEntity } from "@/shared/chat/interfaces/MessageEntity";
-import {
-  CreateMessageRequest,
-  useCreateMessage,
-} from "@/shared/messages/hooks/useCreateMessage";
-import { UserEntity } from "@/shared/user/interfaces/UserEntity";
+import { UserEntity } from "@/shared/user/types/user.entity";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
@@ -23,7 +18,6 @@ interface MessageInputProps {
   chatId: string;
   user: UserEntity;
   socket: Socket;
-  isTyping: boolean;
   setIsTyping: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -31,7 +25,6 @@ export function MessageInput({
   chatId,
   user,
   socket,
-  isTyping,
   setIsTyping,
 }: MessageInputProps) {
   const queryClient = useQueryClient();
