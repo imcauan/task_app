@@ -1,6 +1,9 @@
-import { ColumnEntity } from "./column.entity";
-
 export interface UpdateUserColumnsRequest {
   id: string;
-  columns: ColumnEntity[];
+  columns: ColumnsToUpdate[];
 }
+
+export type ColumnsToUpdate = {
+  id: string;
+  order: number;
+};

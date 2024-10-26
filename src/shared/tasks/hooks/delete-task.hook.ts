@@ -1,22 +1,19 @@
-import { TaskEntity } from "@/shared/tasks/interfaces/task.entity";
 import { api } from "@/services/api";
+import { TaskEntity } from "../types/task.entity";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { DeleteTaskRequest } from "@/shared/tasks/interfaces/delete-task.request.interface";
 
 export function useDeleteTask() {
   const queryClient = useQueryClient();
+  const DeleteTaskFn = async (id: string) => {
+    const { data } = await api.delete<TaskEntity>(`task/${id}`);
 
-  const DeleteTaskFn = async ({ id, workspaceId }: DeleteTaskRequest) => {
-    const { data: task } = await api.delete<TaskEntity>(`task/${id}`);
-
-    queryClient.invalidateQueries({
-      queryKey: workspaceId ? ["workspace"] : ["userTasks"],
-    });
-
-    return task;
+    return data;
   };
 
   return useMutation({
     mutationFn: DeleteTaskFn,
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["workspace"] });
+    },
   });
 }

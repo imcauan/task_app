@@ -1,4 +1,4 @@
-import { TaskEntity } from "../interfaces/task.entity";
+import { TaskEntity } from "../types/task.entity";
 import { api } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
 

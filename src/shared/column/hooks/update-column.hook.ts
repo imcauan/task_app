@@ -14,7 +14,7 @@ export function useUpdateColumn() {
   return useMutation({
     mutationFn: UpdateColumnFn,
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["columns"] });
+      queryClient.invalidateQueries({ queryKey: ["workspace"] });
     },
   });
 }

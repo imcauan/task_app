@@ -14,7 +14,7 @@ export function useCreateColumn() {
   return useMutation({
     mutationFn: CreateColumnFn,
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["columns"] });
+      queryClient.invalidateQueries({ queryKey: ["workspace"] });
     },
   });
 }

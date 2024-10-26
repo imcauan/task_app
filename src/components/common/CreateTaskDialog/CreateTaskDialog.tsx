@@ -1,5 +1,5 @@
 import { FormInput } from "@/components/common/FormInput";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -15,6 +15,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FaCirclePlus } from "react-icons/fa6";
+import { TaskEntity } from "@/shared/tasks/types/task.entity";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name cannot be empty!" }),
@@ -24,6 +25,7 @@ const formSchema = z.object({
 interface CreateTaskDialogProps extends React.ComponentProps<"dialog"> {
   userId: string;
   columnId: string;
+  setTasks: React.Dispatch<React.SetStateAction<TaskEntity[]>>;
   workspaceId?: string;
 }
 
@@ -31,6 +33,7 @@ export function CreateTaskDialog({
   userId,
   workspaceId,
   columnId,
+  setTasks,
   ...props
 }: CreateTaskDialogProps) {
   const { mutateAsync: CreateTaskFn } = useCreateTask();
@@ -43,13 +46,15 @@ export function CreateTaskDialog({
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    await CreateTaskFn({
+    const task = await CreateTaskFn({
       name: data.name,
       description: data.description,
       user_id: userId,
       workspaceId,
       columnId,
     });
+
+    setTasks((prev) => [...(prev ?? []), task]);
   };
 
   return (
@@ -77,11 +82,14 @@ export function CreateTaskDialog({
               placeholder="Button is not working."
             />
             <div className="w-full flex justify-end gap-4">
-              <DialogClose>
-                <Button variant={"link"}>Cancelar</Button>
+              <DialogClose className={buttonVariants({ variant: "link" })}>
+                Cancelar
               </DialogClose>
-              <DialogClose>
-                <Button type="submit">Salvar</Button>
+              <DialogClose
+                className={buttonVariants({ variant: "default" })}
+                type="submit"
+              >
+                Salvar
               </DialogClose>
             </div>
           </form>

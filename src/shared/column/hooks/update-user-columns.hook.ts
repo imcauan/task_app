@@ -5,12 +5,18 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export function useUpdateUserColumns() {
   const queryClient = useQueryClient();
   const updateUserColumnsFn = async (data: UpdateUserColumnsRequest) => {
-    await api.patch(`column/user/${data.id}`, data);
+    const { data: response } = await api.put<UpdateUserColumnsRequest>(
+      `workspace/user`,
+      data
+    );
 
-    queryClient.setQueryData(["columns"], data.columns);
+    return response;
   };
 
   return useMutation({
     mutationFn: updateUserColumnsFn,
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["workspace"] });
+    },
   });
 }

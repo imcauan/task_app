@@ -4,6 +4,7 @@ import { KanbanColumn } from "@/components/common/KanbanTask/KanbanColumn/kanban
 import {
   DndContext,
   DragEndEvent,
+  DragOverEvent,
   DragOverlay,
   DragStartEvent,
   PointerSensor,
@@ -18,23 +19,39 @@ import { ColumnEntity } from "@/shared/column/types/column.entity";
 import { useUpdateColumn } from "@/shared/column/hooks/update-column.hook";
 import { useDeleteColumn } from "@/shared/column/hooks/delete-column.hook";
 import { useCreateColumn } from "@/shared/column/hooks/create-column.hook";
-import { useQueryClient } from "@tanstack/react-query";
+import { TaskEntity } from "@/shared/tasks/types/task.entity";
+import { KanbanTaskCard } from "../KanbanTaskCard/kanban-task-card";
+import { useDeleteTask } from "@/shared/tasks/hooks/delete-task.hook";
 import { useUpdateUserColumns } from "@/shared/column/hooks/update-user-columns.hook";
-
+import { useUpdateColumnTasks } from "@/shared/column/hooks/update-column-tasks.hook";
 interface KanbanBoardProps {
   columns: ColumnEntity[] | undefined;
+  tasks: TaskEntity[] | undefined;
+  setTasks: React.Dispatch<React.SetStateAction<TaskEntity[]>>;
+  workspaceId: string;
   userId: string;
 }
 
-export function KanbanBoard({ columns, userId }: KanbanBoardProps) {
-  const queryClient = useQueryClient();
-  const { mutateAsync: createColumnFn } = useCreateColumn();
-  const { mutate: updateUserColumnsFn } = useUpdateUserColumns();
-  const { mutate: deleteColumnFn } = useDeleteColumn();
-  const { mutate: updateColumnFn } = useUpdateColumn();
+export function KanbanBoard({
+  columns,
+  userId,
+  tasks,
+  setTasks,
+  workspaceId,
+}: KanbanBoardProps) {
+  const [cols, setCols] = React.useState<ColumnEntity[] | null>(columns!);
+
+  const [activeTask, setActiveTask] = React.useState<TaskEntity | null>(null);
   const [activeColumn, setActiveColumn] = React.useState<ColumnEntity | null>(
     null
   );
+
+  const { mutateAsync: createColumnFn } = useCreateColumn();
+  const { mutateAsync: deleteColumnFn } = useDeleteColumn();
+  const { mutateAsync: updateColumnFn } = useUpdateColumn();
+  const { mutate: updateColumnTasksFn } = useUpdateColumnTasks();
+  const { mutate: updateUserColumnFn } = useUpdateUserColumns();
+  const { mutate: deleteTaskFn } = useDeleteTask();
 
   const columnsId = React.useMemo(
     () => columns?.map((col) => col.id),
@@ -49,39 +66,54 @@ export function KanbanBoard({ columns, userId }: KanbanBoardProps) {
     })
   );
   return (
-    <div className="flex flex-col w-full h-full items-center gap-4 overflow-x-visible overflow-y-hidden p-4 mt-10">
-      <Button className="flex max-w-60 items-center gap-3" onClick={addColumn}>
-        <FaPlus />
-        Add column
-      </Button>
+    <div className="flex w-full gap-4 overflow-x-visible overflow-y- p-4">
       <DndContext
         sensors={sensors}
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
+        onDragOver={onDragOver}
       >
         <div>
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-4 items-center h-full">
             <SortableContext items={columnsId as string[]}>
-              {columns &&
-                columns.map((t) => (
+              {cols ? (
+                cols.map((t) => (
                   <KanbanColumn
                     userId={userId}
                     column={t}
                     key={t.id}
+                    setTasks={setTasks}
+                    tasks={
+                      tasks?.filter(
+                        (task) => task.column_id === t.id
+                      ) as TaskEntity[]
+                    }
                     deleteColumn={deleteColumn}
                     updateColumn={updateColumn}
                   />
-                ))}
+                ))
+              ) : (
+                <h1>No columns.</h1>
+              )}
             </SortableContext>
             {createPortal(
               <DragOverlay>
                 {activeColumn && (
                   <KanbanColumn
                     userId={userId}
+                    setTasks={setTasks}
                     column={activeColumn}
+                    tasks={
+                      tasks?.filter(
+                        (task) => task.column_id === activeColumn.id
+                      ) || []
+                    }
                     deleteColumn={deleteColumn}
                     updateColumn={updateColumn}
                   />
+                )}
+                {activeTask && (
+                  <KanbanTaskCard task={activeTask} deleteTask={deleteTaskFn} />
                 )}
               </DragOverlay>,
               document.body
@@ -89,21 +121,37 @@ export function KanbanBoard({ columns, userId }: KanbanBoardProps) {
           </div>
         </div>
       </DndContext>
+      <Button className="flex max-w-60 items-center gap-3" onClick={addColumn}>
+        <FaPlus />
+        Add column.
+      </Button>
     </div>
   );
 
   async function addColumn() {
     const column = await createColumnFn({
       userId,
+      workspaceId,
     });
+
+    setCols((prev) => [...prev!, column]);
   }
 
   async function deleteColumn(id: string) {
-    deleteColumnFn(id);
+    await deleteColumnFn(id);
+
+    setCols((prev) => prev!?.filter((p) => p.id !== id));
   }
 
   async function updateColumn(id: string, title: string) {
-    updateColumnFn({ id, title });
+    const { id: updatedColumnId } = await updateColumnFn({ id, title });
+
+    const updatedColumns = cols?.map((col) => {
+      if (col.id !== updatedColumnId) return col;
+      return { ...col, title };
+    });
+
+    setCols(updatedColumns!);
   }
 
   function onDragStart(ev: DragStartEvent) {
@@ -111,9 +159,17 @@ export function KanbanBoard({ columns, userId }: KanbanBoardProps) {
       setActiveColumn(ev.active.data.current?.column as ColumnEntity);
       return;
     }
+
+    if (ev.active.data.current?.type === "Task") {
+      setActiveTask(ev.active.data.current?.task as TaskEntity);
+      return;
+    }
   }
 
   function onDragEnd(ev: DragEndEvent) {
+    setActiveColumn(null);
+    setActiveTask(null);
+
     const { active, over } = ev;
 
     if (!over) return;
@@ -122,17 +178,94 @@ export function KanbanBoard({ columns, userId }: KanbanBoardProps) {
     const overColumnId = over.id;
 
     if (activeColumnId === overColumnId) return;
-
     const activeColumnIndex = columns?.findIndex(
       (c) => c.id === activeColumnId
     );
     const overColumnIndex = columns?.findIndex((c) => c.id === overColumnId);
+
     const updatedColumns = arrayMove(
-      columns as ColumnEntity[],
+      cols as ColumnEntity[],
       activeColumnIndex as number,
       overColumnIndex as number
     );
 
-    queryClient.setQueryData(["columns"], updatedColumns);
+    setCols(updatedColumns);
+
+    const columnsToUpdate = updatedColumns?.map((col, index) => ({
+      id: col.id,
+      order: index,
+    }));
+
+    updateUserColumnFn({ id: workspaceId, columns: columnsToUpdate! });
+  }
+
+  function onDragOver(ev: DragOverEvent) {
+    const { active, over } = ev;
+    if (!over) return;
+
+    const columnId = active?.data.current?.task?.column_id;
+
+    const columnToUpdate = columns?.find((c) => c.id === columnId)!;
+    const { id, tasks } = columnToUpdate ?? [];
+
+    const activeId = active.id;
+    const overId = over.id;
+
+    const existsActiveTask = active.data.current?.type === "Task";
+    const existsOverTask = over.data.current?.type === "Task";
+
+    const activeTaskIndex = tasks?.findIndex((t) => t.id === activeId);
+    const overTaskIndex = tasks?.findIndex((t) => t.id === overId);
+
+    if (existsActiveTask && existsOverTask) {
+      const updatedTasks = arrayMove(
+        tasks as TaskEntity[],
+        activeTaskIndex as number,
+        overTaskIndex as number
+      );
+
+      const tasksToUpdate = updatedTasks.map((t, index) => ({
+        id: t.id,
+        order: index,
+      }));
+
+      updateColumnTasksFn({
+        id,
+        tasks: tasksToUpdate,
+      });
+
+      setTasks((tasks) => {
+        tasks![activeTaskIndex as number].column_id =
+          tasks![overTaskIndex as number].column_id;
+
+        return updatedTasks;
+      });
+    }
+
+    const isOverAColumn = over.data.current?.type === "Column";
+
+    console.log(`overId => ${overId}`);
+    console.log(`isOverAColumn => ${isOverAColumn}`);
+
+    // --------------------------------------------------
+    if (existsActiveTask && isOverAColumn) {
+      setTasks((tasks) => {
+        const activeIndex = tasks.findIndex((t) => t.id === activeId);
+        tasks![activeIndex].column_id = overId as string;
+
+        const updatedTasks = arrayMove(tasks, activeTaskIndex, activeTaskIndex);
+
+        updateColumnTasksFn({
+          id,
+          tasks: updatedTasks.map((t, index) => ({
+            id: t.id,
+            order: index,
+            columnId: t.column_id,
+          })),
+        });
+
+        return updatedTasks;
+      });
+    }
   }
 }

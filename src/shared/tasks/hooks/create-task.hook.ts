@@ -1,13 +1,11 @@
-import { TaskEntity } from "@/shared/tasks/interfaces/task.entity";
+import { TaskEntity } from "@/shared/tasks/types/task.entity";
 import { api } from "@/services/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { CreateTaskRequest } from "@/shared/tasks/interfaces/create-task-request.interface";
+import { CreateTaskRequest } from "@/shared/tasks/types/create-task-request.interface";
 
 export function useCreateTask() {
   const queryClient = useQueryClient();
   const CreateTaskFn = async (data: CreateTaskRequest): Promise<TaskEntity> => {
-    console.log(`workspaceId: ${data.workspaceId}`);
-
     const { data: task } = await api.post<TaskEntity>("task", data);
 
     return task;
@@ -15,9 +13,9 @@ export function useCreateTask() {
 
   return useMutation({
     mutationFn: CreateTaskFn,
-    onSuccess(_, variables) {
+    onSuccess() {
       queryClient.invalidateQueries({
-        queryKey: variables.workspaceId ? ["workspace"] : ["userTasks"],
+        queryKey: ["workspace"],
       });
     },
   });

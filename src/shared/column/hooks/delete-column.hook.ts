@@ -13,7 +13,7 @@ export function useDeleteColumn() {
   return useMutation({
     mutationFn: deleteColumnFn,
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["columns"] });
+      queryClient.invalidateQueries({ queryKey: ["workspace"] });
     },
   });
 }
