@@ -1,9 +1,9 @@
 import { IconType } from "react-icons/lib";
-import { MdDashboard, MdLogout, MdSend, MdSettings } from "react-icons/md";
+import { MdLogout, MdSend, MdSettings } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
-import { useLogout } from "@/shared/auth/hooks/useLogout";
+import { useLogout } from "@/shared/auth/hooks/logout.hook";
 import { BsPeopleFill } from "react-icons/bs";
-
+import { HiArrowTrendingUp } from "react-icons/hi2";
 export interface LinkEntity {
   href: string;
   icon: IconType;
@@ -14,18 +14,13 @@ export interface LinkEntity {
 export const links: LinkEntity[] = [
   {
     href: "/dashboard",
-    icon: MdDashboard,
+    icon: HiArrowTrendingUp,
     text: "Dashboard",
   },
   {
     href: "/workspaces/all",
     icon: BsPeopleFill,
     text: "Workspaces",
-  },
-  {
-    href: "/tasks",
-    icon: FaCheck,
-    text: "Tasks",
   },
   {
     href: "/chat",

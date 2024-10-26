@@ -14,7 +14,7 @@ export default function Page() {
       <div className="flex flex-col h-full w-full px-10 mt-10 gap-4">
         <h1 className="text-xl font-semibold">Subscriptions</h1>
         <div className="w-full h-full">
-          {!user?.subscription && (
+          {user?.stripeSubscriptionStatus !== "active" && (
             <>
               <p className="text-center font-semibold text-xl">
                 Choose the plan that fits more to your needs.

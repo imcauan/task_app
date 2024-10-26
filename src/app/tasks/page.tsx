@@ -1,39 +1,24 @@
 "use client";
 
-import { useAuthContext } from "@/hooks/useAuthContext";
-import { TaskStatus } from "@/enums/task-status.enum";
 import React from "react";
-import { TaskList } from "./_components/TaskList/TaskList";
-import { useGetTasks } from "@/hooks/tasks/useGetTasks";
 import { Sidebar } from "@/components/common/Sidebar/Sidebar";
+import { Bottombar } from "@/components/mobile/Bottombar/bottom-bar";
+import { KanbanBoard } from "@/components/common/KanbanTask/KanbanBoard/kanban-board";
+import { useUser } from "@/shared/auth/hooks/user.hook";
+import { RoundSpinner } from "@/components/common/Spinner/spinner";
 
-export default function Page() {
-  const { user } = useAuthContext();
-  const { data: tasks } = useGetTasks();
-
+export default function TaskPage() {
+  const { isLoading, data: user } = useUser();
   return (
-    <div className="w-full h-screen flex dark:bg-black">
+    <div className="w-full h-full flex dark:bg-black">
       <Sidebar />
-      <div className="flex px-10 mt-10 w-full">
-        <TaskList
-          userId={user?.id!}
-          title="To-do"
-          type={TaskStatus.TODO}
-          tasks={tasks ?? []}
-        />
-        <TaskList
-          userId={user?.id!}
-          title="On progress"
-          type={TaskStatus.ON_PROGRESS}
-          tasks={tasks ?? []}
-        />
-
-        <TaskList
-          userId={user?.id!}
-          title="Finished"
-          type={TaskStatus.DONE}
-          tasks={tasks ?? []}
-        />
+      <div className="w-full h-full flex flex-col overflow-auto gap-4 mt-4">
+        {isLoading ? (
+          <RoundSpinner />
+        ) : (
+          <KanbanBoard columns={user?.columns} userId={user?.id!} />
+        )}
+        <Bottombar />
       </div>
     </div>
   );
