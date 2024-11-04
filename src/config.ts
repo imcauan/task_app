@@ -16,3 +16,5 @@ export const config = {
     },
   },
 };
+
+export const locales = ["en", "pt"] as const;
