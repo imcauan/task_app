@@ -1,17 +1,15 @@
-"use client";
-
+import { SignUpFormHeader } from "@/app/[locale]/(auth)/register/_components/sign-up-form-header.component";
+import { Container } from "@/components/common/Container/container.component";
 import { FormInput } from "@/components/common/FormInput";
-import { RoundSpinner } from "@/components/common/Spinner/spinner";
+import { BorderBeam } from "@/components/ui/border-beam";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { useSignUpByInvite } from "@/shared/auth/hooks/sign-up-by-invite.hook";
 import { useSignUp } from "@/shared/auth/hooks/sign-up.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import React from "react";
 import { useForm } from "react-hook-form";
-import { FaTasks } from "react-icons/fa";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -20,8 +18,13 @@ const formSchema = z.object({
   password: z.string().min(1, "Password is required"),
 });
 
-export default function Page({ params }: { params: { workspaceId: string } }) {
-  const { workspaceId } = params;
+interface SignUpFormProps {
+  workspaceId?: string;
+}
+
+export function SignUpForm({ workspaceId }: SignUpFormProps) {
+  const t = useTranslations("index");
+  const locale = useLocale();
   const { mutateAsync: SignUpFn } = useSignUp();
   const { mutateAsync: SignUpByInviteFn } = useSignUpByInvite();
 
@@ -43,18 +46,10 @@ export default function Page({ params }: { params: { workspaceId: string } }) {
   };
 
   return (
-    <div className="w-full h-dvh lg:h-screen dark:bg-black flex flex-col justify-center items-center gap-4">
-      <div className="text-center">
-        <div className="flex justify-center w-full items-center gap-2 text-lg">
-          <FaTasks />
-          <p className="font-semibold">TaskApp</p>
-        </div>
-        <h1 className="text-xl font-semibold">Welcome to the App!</h1>
-        <p className="text-base font-semibold text-neutral-400">
-          Register to use our app!
-        </p>
-      </div>
-      <div className="min-w-96">
+    <Container className="w-full flex flex-col justify-center items-center absolute h-full">
+      <Container className="w-96 border bg-white relative rounded-lg p-4">
+        <BorderBeam colorFrom="#fbbf24" colorTo="#4f46e5" borderWidth={2} />
+        <SignUpFormHeader />
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -80,13 +75,18 @@ export default function Page({ params }: { params: { workspaceId: string } }) {
               type="password"
               placeholder="*******"
             />
-            <Button type="submit">Register</Button>
-            <Link href={"/login"} className="text-center">
-              Do you have an account? <span className="font-bold">Login</span>
+            <Button
+              className=" bg-gradient-to-r from-amber-400 to-indigo-600"
+              type="submit"
+            >
+              {t("register.register")}
+            </Button>
+            <Link href={`/${locale}/login`} className="text-center">
+              {t("register.account-ask")}
             </Link>
           </form>
         </Form>
-      </div>
-    </div>
+      </Container>
+    </Container>
   );
 }
