@@ -51,6 +51,19 @@
       "password": "Password:",
       "account-ask": "Do you have an account? Login.",
       "register": "Register"
+    },
+    "forgot-password": {
+      "title": "Forgot your password?",
+      "description": "Enter a email linked with the account that you want to recover.",
+      "email": "Email:",
+      "confirm": "Confirm"
+    },
+    "reset-password": {
+      "title": "Reset your password",
+      "description": "Enter a new password for your account.",
+      "password": "Password:",
+      "confirm-password": "Confirmar senha:",
+      "confirm": "Confirm"
     }
   }
 }
