@@ -33,6 +33,37 @@
         "cta-plans": "Would you like to tryout? Click here."
       },
       "footer": "Made by Cauan Diniz."
+    },
+    "login": {
+      "title": "Welcome back!",
+      "description": "Login to keep your team updated.",
+      "email": "Email:",
+      "password": "Password:",
+      "forgot-password": "Forgot your password?",
+      "account-ask": "Don't you have an account? Register.",
+      "login": "Login"
+    },
+    "register": {
+      "title": "Welcome to TaskApp!",
+      "description": "Create your account to get started.",
+      "name": "Name:",
+      "email": "Email:",
+      "password": "Password:",
+      "account-ask": "Do you have an account? Login.",
+      "register": "Register"
+    },
+    "forgot-password": {
+      "title": "Forgot your password?",
+      "description": "Enter a email linked with the account that you want to recover.",
+      "email": "Email:",
+      "confirm": "Confirm"
+    },
+    "reset-password": {
+      "title": "Reset your password",
+      "description": "Enter a new password for your account.",
+      "password": "Password:",
+      "confirm-password": "Confirmar senha:",
+      "confirm": "Confirm"
     }
   }
 }

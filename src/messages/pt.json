@@ -33,6 +33,37 @@
         "cta-plans": "Gostaria de uma avaliação gratuita? Clique aqui."
       },
       "footer": "Feito por Cauan Diniz."
+    },
+    "login": {
+      "title": "Bem vindo de volta!",
+      "description": "Faça login para manter sua equipe atualizada.",
+      "email": "Email:",
+      "password": "Senha:",
+      "forgot-password": "Esqueceu a senha?",
+      "account-ask": "Não tem uma conta? Registre-se.",
+      "login": "Login"
+    },
+    "register": {
+      "title": "Bem-vindo ao TaskApp!",
+      "description": "Para começar, crie sua conta.",
+      "name": "Nome:",
+      "email": "Email:",
+      "password": "Senha:",
+      "account-ask": "Já tem uma conta? Login.",
+      "register": "Registrar"
+    },
+    "forgot-password": {
+      "title": "Esqueceu a senha?",
+      "description": "Envie um email associado a conta que deseja recuperar.",
+      "email": "Email:",
+      "confirm": "Confirmar"
+    },
+    "reset-password": {
+      "title": "Redefinir sua senha",
+      "description": "Insira uma nova senha para sua conta.",
+      "password": "Senha:",
+      "confirm-password": "Confirmar senha:",
+      "confirm": "Confirmar"
     }
   }
 }
