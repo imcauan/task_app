@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="w-full flex flex-col bg-white dark:bg-black">
       <div className="flex w-full h-screen">
-        <div className="flex flex-col w-1/2">
+        <div className="flex flex-col w-full">
           <LandingPageHeader theme={theme} setTheme={setTheme} />
           <LandingPageMain />
         </div>

@@ -1,0 +1,38 @@
+{
+  "index": {
+    "title": "TaskApp",
+    "landing-page": {
+      "title": "The best tool to manage your tasks",
+      "header": {
+        "about": "About",
+        "plans": "Plans"
+      },
+      "description": "Organize your tasks, set deadlines, and collaborate with your team.",
+      "try-now": "Try now",
+      "plans": {
+        "title": "And all the benefits are really closer to you.",
+        "description": "Choose the best plan for your business.",
+        "free-plan": {
+          "title": "Free",
+          "description": "For small teams and individuals",
+          "benefits": {
+            "workspace": "1 workspace",
+            "dashboard": "Can't access dashboard",
+            "chats": "Can't access chats"
+          }
+        },
+        "pro-plan": {
+          "title": "Pro",
+          "description": "For big companies and organizations",
+          "benefits": {
+            "workspace": "Unlimited workspaces",
+            "dashboard": "Can access dashboard",
+            "chats": "Can access chats"
+          }
+        },
+        "cta-plans": "Would you like to tryout? Click here."
+      },
+      "footer": "Made by Cauan Diniz."
+    }
+  }
+}

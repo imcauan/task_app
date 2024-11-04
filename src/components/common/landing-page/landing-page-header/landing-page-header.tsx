@@ -1,9 +1,10 @@
 import React from "react";
-import { FaMoon, FaSun, FaTasks } from "react-icons/fa";
 import { LandingPageLinks } from "@/components/common/landing-page/landing-page-links/landing-page-links";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { Separator } from "@/components/ui/separator";
+import { SwitchLanguage } from "@/components/common/landing-page/landing-page-header/switch-language.component";
+import { useLocale } from "next-intl";
+import { SwitchTheme } from "@/components/common/landing-page/landing-page-header/switch-theme.component";
+import { Logo } from "@/components/common/Logo/logo.component";
+import { Container } from "@/components/common/Container/container.component";
 
 interface LandingPageHeaderProps extends React.ComponentProps<"header"> {
   theme: string | undefined;
@@ -15,15 +16,20 @@ export function LandingPageHeader({
   setTheme,
   ...props
 }: LandingPageHeaderProps) {
+  const locale = useLocale();
   return (
-    <header className="w-full h-10 flex px-12 mt-10" {...props}>
-      <div className="flex w-full h-full items-center gap-8">
-        <div className="flex gap-2 items-center p-4 text-2xl">
-          <FaTasks />
-          <p className="font-semibold">TaskApp</p>
-        </div>
+    <header
+      className="w-full h-10 flex px-12 mt-10 justify-between "
+      {...props}
+    >
+      <Container className="flex w-full h-full justify-between items-center gap-8">
+        <Logo />
         <LandingPageLinks />
-      </div>
+        <Container className="flex items-center gap-3">
+          <SwitchTheme />
+          <SwitchLanguage locale={locale} />
+        </Container>
+      </Container>
     </header>
   );
 }

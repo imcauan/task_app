@@ -1,0 +1,38 @@
+{
+  "index": {
+    "title": "TaskApp",
+    "landing-page": {
+      "title": "A melhor ferramenta para gerenciar suas tarefas.",
+      "header": {
+        "about": "Sobre",
+        "plans": "Planos"
+      },
+      "description": "Organize tarefas, administre prazos, e colabore com seu time.",
+      "try-now": "Experimente agora.",
+      "plans": {
+        "title": "E todos esses benefícios estão próximos de você.",
+        "description": "Escolha o melhor plano para seu negócio.",
+        "free-plan": {
+          "title": "Gratuito",
+          "description": "Para equipes menores e individual",
+          "benefits": {
+            "workspace": "1 Espaço",
+            "dashboard": "Não pode acessar a dashboard",
+            "chats": "Não pode acessar o chat"
+          }
+        },
+        "pro-plan": {
+          "title": "Pro",
+          "description": "Para equipes maiores e organizações",
+          "benefits": {
+            "workspace": "Espaços ilimitados",
+            "dashboard": "Pode acessar a dashboard",
+            "chats": "Pode acessar o chat"
+          }
+        },
+        "cta-plans": "Gostaria de uma avaliação gratuita? Clique aqui."
+      },
+      "footer": "Feito por Cauan Diniz."
+    }
+  }
+}
