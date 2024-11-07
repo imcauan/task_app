@@ -64,6 +64,20 @@
       "password": "Password:",
       "confirm-password": "Confirmar senha:",
       "confirm": "Confirm"
+    },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "workspaces": "Workspaces",
+      "chats": "Chats",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
+    "dashboard": {
+      "welcome": "Hello, {name}!"
+    },
+    "settings": {
+      "profile": "Profile",
+      "subscription": "Subscription"
     }
   }
 }
