@@ -1,9 +1,9 @@
+import { KanbanTaskCardDetails } from "@/components/app/workspaces/kanban-task-card/kanban-task-card-details.component";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { TaskEntity } from "@/shared/tasks/types/task.entity";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import React from "react";
-import { FaTrash } from "react-icons/fa";
 
 interface KanbanTaskCardProps extends React.ComponentProps<"div"> {
   task: TaskEntity;
@@ -36,27 +36,28 @@ export function KanbanTaskCard({
   };
 
   if (isDragging) {
-    return (
-      <div
-        ref={setNodeRef}
-        style={style}
-        className=" shadow-none rounded-none "
-      ></div>
-    );
+    return <div ref={setNodeRef} style={style} className="shadow-none"></div>;
   }
 
   return (
     <Card
-      className="rounded-none"
+      className="rounded-xl dark:bg-neutral-800"
       style={style}
       ref={setNodeRef}
-      {...attributes}
-      {...listeners}
       {...props}
     >
-      <CardHeader className="flex justify-between items-center gap-4">
-        <CardTitle className="font-normal text-base">{task.name}</CardTitle>
-        <FaTrash onClick={() => deleteTask(task.id)} />
+      <CardHeader className="flex justify-between p-4">
+        <CardTitle
+          className="font-normal text-sm"
+          {...attributes}
+          {...listeners}
+        >
+          {task.name}
+        </CardTitle>
+        <KanbanTaskCardDetails
+          task={task}
+          onDelete={() => deleteTask(task.id)}
+        />
       </CardHeader>
     </Card>
   );

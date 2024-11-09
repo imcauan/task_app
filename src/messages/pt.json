@@ -66,15 +66,42 @@
       "confirm": "Confirmar"
     },
     "sidebar": {
-      "dashboard": "Dashboard",
       "workspaces": "Espaços",
       "chats": "Chats",
       "settings": "Configurações",
       "logout": "Logout"
     },
+    "workspace": {
+      "title": "Espaços de trabalho",
+      "kanban": {
+        "create-column": "Adicionar coluna",
+        "create-task": "Criar uma nova tarefa",
+        "create-task-form": {
+          "name": "Name",
+          "description": "Description",
+          "members": "Membros",
+          "priority": "Priority",
+          "priorities": {
+            "LOW": "Baixa",
+            "MEDIUM": "Média",
+            "HIGH": "Alta"
+          }
+        },
+        "task-details": {
+          "delete": "Deletar"
+        }
+      }
+    },
     "settings": {
       "profile": "Perfil",
       "subscription": "Assinatura"
+    },
+    "button-actions": {
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "create": "Criar",
+      "delete": "Deletar"
     }
   }
 }

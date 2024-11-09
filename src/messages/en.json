@@ -72,12 +72,37 @@
       "settings": "Settings",
       "logout": "Logout"
     },
-    "dashboard": {
-      "welcome": "Hello, {name}!"
+    "workspace": {
+      "title": "Workspaces",
+      "kanban": {
+        "create-column": "Add column",
+        "create-task": "Create a new task",
+        "create-task-form": {
+          "name": "Name",
+          "description": "Description",
+          "members": "Members",
+          "priority": "Priority",
+          "priorities": {
+            "LOW": "Low",
+            "MEDIUM": "Medium",
+            "HIGH": "High"
+          }
+        },
+        "task-details": {
+          "delete": "Delete"
+        }
+      }
     },
     "settings": {
       "profile": "Profile",
       "subscription": "Subscription"
+    },
+    "button-actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "create": "Create",
+      "delete": "Delete"
     }
   }
 }
