@@ -12,30 +12,24 @@ export interface LinkEntity {
   onClick?: () => void;
 }
 export function useSidebarLinks() {
-  const locale = useLocale();
   const links: LinkEntity[] = [
     {
-      href: `/${locale}/dashboard`,
-      icon: HiArrowTrendingUp,
-      text: "Dashboard",
-    },
-    {
-      href: `/${locale}/workspaces/all`,
+      href: `workspaces`,
       icon: BsPeopleFill,
       text: "Workspaces",
     },
     {
-      href: `/${locale}/chat`,
+      href: `chat`,
       icon: MdSend,
       text: "Chats",
     },
     {
-      href: `/${locale}/settings`,
+      href: `settings`,
       icon: MdSettings,
       text: "Settings",
     },
     {
-      href: `/${locale}/login`,
+      href: `login`,
       icon: MdLogout,
       text: "Logout",
       onClick: useLogout,

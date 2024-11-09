@@ -19,7 +19,7 @@ export function useSignIn() {
   return useMutation({
     mutationFn: SignInFn,
     onSuccess: () => {
-      router.push("/dashboard");
+      router.push(`workspaces`);
     },
     onError(error) {
       console.log(error);
