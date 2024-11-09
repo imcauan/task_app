@@ -1,10 +1,11 @@
-import { SignInFormHeader } from "@/app/[locale]/(auth)/login/_components/sign-in-form-header.component";
-import { Container } from "@/components/common/Container/container.component";
-import { FormInput } from "@/components/common/FormInput";
+import { SignUpFormHeader } from "@/components/app/auth/register/sign-up-form-header.component";
+import { Container } from "@/components/ui/container.component";
+import { FormInput } from "@/components/ui/form-input";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { useSignIn } from "@/shared/auth/hooks/sign-in.hook";
+import { useSignUpByInvite } from "@/shared/auth/hooks/sign-up-by-invite.hook";
+import { useSignUp } from "@/shared/auth/hooks/sign-up.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
@@ -12,66 +13,76 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const formSchema = z.object({
+  name: z.string().min(1, "Name is required"),
   email: z.string().email("Email is invalid"),
   password: z.string().min(1, "Password is required"),
 });
 
-export function SignInForm() {
-  const locale = useLocale();
+interface SignUpFormProps {
+  workspaceId?: string;
+}
+
+export function SignUpForm({ workspaceId }: SignUpFormProps) {
   const t = useTranslations("index");
-  const { mutateAsync: SignInFn } = useSignIn();
+  const locale = useLocale();
+  const { mutateAsync: SignUpFn } = useSignUp();
+  const { mutateAsync: SignUpByInviteFn } = useSignUpByInvite();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
+      name: "",
       password: "",
     },
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    await SignInFn(data);
+    if (workspaceId) {
+      await SignUpByInviteFn({ ...data, workspaceId });
+    }
+
+    await SignUpFn(data);
   };
 
   return (
     <Container className="w-full flex flex-col justify-center items-center absolute h-full">
-      <Container className="w-96 h-96 border bg-white relative rounded-lg p-4">
+      <Container className="w-96 border dark:bg-neutral-800 relative rounded-lg p-4">
         <BorderBeam colorFrom="#fbbf24" colorTo="#4f46e5" borderWidth={2} />
-        <SignInFormHeader />
+        <SignUpFormHeader />
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col gap-4 p-4"
+            className="grid grid-cols-1 gap-4"
           >
             <FormInput
               form={form}
+              name="name"
+              label="Name:"
+              placeholder="John Doe"
+            />
+            <FormInput
+              form={form}
               name="email"
-              label={t("login.email")}
+              label="Email:"
               type="email"
-              className="bg-white border shadow-sm"
               placeholder="johndoe@email.com"
             />
             <FormInput
               form={form}
               name="password"
-              label={t("login.password")}
+              label="Password:"
               type="password"
-              className="bg-white shadow-sm relative"
               placeholder="*******"
             />
             <Button
+              className=" bg-gradient-to-r from-amber-400 to-indigo-600"
               type="submit"
-              className="w-full bg-gradient-to-r from-amber-400 to-indigo-600"
             >
-              {t("login.login")}
+              {t("register.register")}
             </Button>
-            <Link
-              href={`forgot-password`}
-              className="text-sm text-center font-semibold"
-            >
-              {t("login.forgot-password")}
-            </Link>
-            <Link href={`/${locale}/register`} className="text-center">
-              {t("login.account-ask")}
+            <Link href={`/${locale}/login`} className="text-center">
+              {t("register.account-ask")}
             </Link>
           </form>
         </Form>

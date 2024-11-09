@@ -1,6 +1,6 @@
-import { ResetPasswordFormHeader } from "@/app/[locale]/(auth)/reset-password/_components/reset-password-form-header.component";
-import { Container } from "@/components/common/Container/container.component";
-import { FormInput } from "@/components/common/FormInput";
+import { ResetPasswordFormHeader } from "@/components/app/auth/reset-password/reset-password-form-header.component";
+import { Container } from "@/components/ui/container.component";
+import { FormInput } from "@/components/ui/form-input";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";

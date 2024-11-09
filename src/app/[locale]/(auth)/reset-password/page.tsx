@@ -1,8 +1,8 @@
 "use client";
 
-import { ResetPasswordForm } from "@/app/[locale]/(auth)/reset-password/_components/reset-password-form.component";
-import { Container } from "@/components/common/Container/container.component";
-import { Logo } from "@/components/common/Logo/logo.component";
+import { ResetPasswordForm } from "@/components/app/auth/reset-password/reset-password-form.component";
+import { Container } from "@/components/ui/container.component";
+import { Logo } from "@/components/ui/logo.component";
 import { useSearchParams } from "next/navigation";
 
 export default function Page() {

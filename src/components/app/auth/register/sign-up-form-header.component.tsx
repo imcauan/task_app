@@ -1,4 +1,4 @@
-import { Container } from "@/components/common/Container/container.component";
+import { Container } from "@/components/ui/container.component";
 import { useTranslations } from "next-intl";
 
 export function SignUpFormHeader() {
