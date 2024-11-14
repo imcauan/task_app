@@ -12,9 +12,10 @@ export default function WorkspaceHomeHeader({
   userId,
   ...props
 }: WorkspaceHomeHeaderProps) {
+  const t = useTranslations("index");
   return (
     <header className="flex w-full gap-4 items-center" {...props}>
-      {/* <h1 className="font-semibold text-lg">{t("workspace.title")}</h1> */}
+      <h1 className="font-semibold text-lg">{t("workspace.title")}</h1>
       <CreateWorkspaceDialog userId={userId} />
     </header>
   );

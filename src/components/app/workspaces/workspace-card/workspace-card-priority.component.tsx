@@ -1,12 +1,12 @@
 import React from "react";
 
-interface DashboardWorkspaceCardPriorityProps {
+interface WorkspaceCardPriorityProps {
   priority: string;
 }
 
-export function DashboardWorkspaceCardPriority({
+export function WorkspaceCardPriority({
   priority,
-}: DashboardWorkspaceCardPriorityProps) {
+}: WorkspaceCardPriorityProps) {
   return (
     <React.Fragment>
       <p className="text-xs text-white p-2 rounded-full bg-red-300">

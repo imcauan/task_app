@@ -7,13 +7,11 @@ import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";
 import Image from "next/image";
 import React from "react";
 
-interface DashboardWorkspaceCardHeaderProps {
+interface WorkspaceCardHeaderProps {
   workspace: WorkspaceEntity;
 }
 
-export function DashboardWorkspaceCardHeader({
-  workspace,
-}: DashboardWorkspaceCardHeaderProps) {
+export function WorkspaceCardHeader({ workspace }: WorkspaceCardHeaderProps) {
   return (
     <React.Fragment>
       <CardHeader className="flex w-full items-center justify-between gap-4">

@@ -74,6 +74,9 @@
     },
     "workspace": {
       "title": "Workspaces",
+      "create-workspace": {
+        "title": "Create a workspace"
+      },
       "kanban": {
         "create-column": "Add column",
         "create-task": "Create a new task",
@@ -90,6 +93,14 @@
         },
         "task-details": {
           "delete": "Delete"
+        }
+      },
+      "settings": {
+        "title": "Settings",
+        "restrict-area": "Restrict area",
+        "delete-workspace": "Delete workspace",
+        "delete-workspace-dialog": {
+          "title": "Are you sure you want to delete {name}?"
         }
       }
     },

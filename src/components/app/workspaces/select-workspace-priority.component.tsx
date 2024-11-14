@@ -7,7 +7,6 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import React from "react";
-import { TaskPriority } from "@/shared/tasks/enums/task-priority.enum";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import {
   FormControl,
@@ -18,22 +17,22 @@ import {
 import { useTranslations } from "next-intl";
 import { WorkspacePriority } from "@/shared/workspaces/enums/workspace-priority.enum";
 
-export interface SelectPriorityProps<T extends FieldValues>
+export interface SelectWorkspacePriorityProps<T extends FieldValues>
   extends Omit<React.ComponentProps<"select">, "form"> {
   form: UseFormReturn<T>;
   name: Path<T>;
   label?: string;
-  setSelected: React.Dispatch<React.SetStateAction<TaskPriority>>;
-  selected: TaskPriority;
+  setSelected: React.Dispatch<React.SetStateAction<WorkspacePriority>>;
+  selected: WorkspacePriority;
 }
 
-export function SelectPriority<T extends FieldValues>({
+export function SelectWorkspacePriority<T extends FieldValues>({
   form,
   name,
   label,
   setSelected,
   selected,
-}: SelectPriorityProps<T>) {
+}: SelectWorkspacePriorityProps<T>) {
   const t = useTranslations("index");
   const priorities = [
     {
@@ -61,7 +60,7 @@ export function SelectPriority<T extends FieldValues>({
           </FormLabel>
           <FormControl>
             <Select
-              onValueChange={(e) => setSelected(e as TaskPriority)}
+              onValueChange={(e) => setSelected(e as WorkspacePriority)}
               {...field}
               value={selected}
             >

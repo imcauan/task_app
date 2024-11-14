@@ -81,7 +81,7 @@ export function KanbanBoard({
         onDragOver={onDragOver}
       >
         <div>
-          <div className="flex gap-4 items-center h-full">
+          <div className="flex gap-4 items-center h-full overflow-x-auto">
             <SortableContext items={columnsId as string[]}>
               {cols ? (
                 cols.map((t) => (

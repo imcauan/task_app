@@ -1,4 +1,6 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryProvider } from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { NextIntlClientProvider } from "next-intl";
@@ -21,7 +23,12 @@ export async function Providers({ children }: ProvidersProps) {
         disableTransitionOnChange
       >
         <NextIntlClientProvider messages={messages}>
-          <SidebarProvider>{children}</SidebarProvider>
+          <TooltipProvider>
+            <SidebarProvider>
+              <Toaster />
+              {children}
+            </SidebarProvider>
+          </TooltipProvider>
         </NextIntlClientProvider>
       </ThemeProvider>
     </QueryProvider>

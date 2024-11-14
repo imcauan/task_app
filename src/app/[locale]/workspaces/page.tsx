@@ -3,7 +3,7 @@
 import Link from "next/link";
 import WorkspaceHomeHeader from "@/components/app/workspaces/workspace-home-header";
 import { useUser } from "@/shared/auth/hooks/user.hook";
-import { DashboardWorkspaceCard } from "@/components/app/workspaces/workspace-card/workspace-card.component";
+import { WorkspaceCard } from "@/components/app/workspaces/workspace-card/workspace-card.component";
 import { Container } from "@/components/ui/container.component";
 
 export default function Page() {
@@ -11,13 +11,13 @@ export default function Page() {
 
   return (
     <Container className="w-full h-full flex mt-6 overflow-hidden">
-      <Container className="flex flex-col w-full p-4">
+      <Container className="flex flex-col w-full p-4 space-y-4">
         <WorkspaceHomeHeader userId={user?.id} />
         <Container className="grid grid-cols-1 lg:grid-cols-2 w-full">
           {user &&
             user.workspaces.map((workspace) => (
               <Link href={`workspaces/${workspace.id}`} key={workspace.id}>
-                <DashboardWorkspaceCard workspace={workspace} />
+                <WorkspaceCard workspace={workspace} />
               </Link>
             ))}
         </Container>
