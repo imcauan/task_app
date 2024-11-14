@@ -38,11 +38,8 @@ export function SignUpForm({ workspaceId }: SignUpFormProps) {
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    if (workspaceId) {
-      await SignUpByInviteFn({ ...data, workspaceId });
-    }
-
-    await SignUpFn(data);
+    console.log(`workspaceId => ${workspaceId}`);
+    return SignUpByInviteFn({ ...data, workspaceId });
   };
 
   return (

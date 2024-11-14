@@ -30,10 +30,7 @@ export default function WorkspaceManagement({
     <Container className="flex flex-col gap-3 w-full justify-center">
       <Container className="flex items-center gap-3">
         <h1 className="text-lg font-semibold">Workspace members</h1>
-        <AddMemberDialog
-          name={user?.name as string}
-          workspaceName={workspace.name}
-        />
+        <AddMemberDialog name={user?.name as string} workspace={workspace} />
       </Container>
       <Container className="max-w-6xl space-y-4">
         <WorkspaceMembersTable data={data} columns={columns} />

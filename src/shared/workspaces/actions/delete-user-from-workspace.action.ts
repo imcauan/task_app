@@ -6,11 +6,12 @@ import { DeleteUserFromWorkspaceRequest } from "@/shared/workspaces/types/delete
 export async function DeleteUserFromWorkspace(
   data: DeleteUserFromWorkspaceRequest
 ) {
-  const response = await api
-    .patch<DeleteUserFromWorkspaceRequest>(`workspace/user`, {
-      data,
-    })
-    .then((res) => res.data);
-
-  return response;
+  console.log(data);
+  try {
+    await api
+      .post<DeleteUserFromWorkspaceRequest>(`workspace/user`, data)
+      .then((res) => res.data);
+  } catch (error) {
+    console.log(error);
+  }
 }

@@ -8,10 +8,11 @@ import { Form } from "@/components/ui/form";
 import { useInviteMemberByEmail } from "@/shared/mail/hooks/invite-member-by-email.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";
 
 interface InviteMemberFormProps extends React.ComponentProps<"form"> {
   name: string;
-  workspaceName: string;
+  workspace: WorkspaceEntity;
 }
 
 const formSchema = z.object({
@@ -20,7 +21,7 @@ const formSchema = z.object({
 
 export function InviteMemberForm({
   name,
-  workspaceName,
+  workspace,
   ...props
 }: InviteMemberFormProps) {
   const { InviteMemberByEmailFn } = useInviteMemberByEmail();
@@ -35,8 +36,8 @@ export function InviteMemberForm({
     await InviteMemberByEmailFn({
       email,
       username: name,
-      link: `http://localhost:3000/workspaces`,
-      workspaceName: workspaceName,
+      workspaceName: workspace.name,
+      workspaceId: workspace.id,
     });
   };
 
