@@ -104,8 +104,20 @@
       }
     },
     "settings": {
-      "profile": "Perfil",
-      "subscription": "Assinatura"
+      "title": "Configurações",
+      "return": "Voltar para o espaço de trabalho",
+      "profile": {
+        "title": "Perfil",
+        "theme": "Tema",
+        "language": "Idioma",
+        "update-user": {
+          "title": "Atualizar usuário",
+          "submit": "Salvar informações"
+        }
+      },
+      "subscription": {
+        "title": "Assinatura"
+      }
     },
     "button-actions": {
       "save": "Salvar",

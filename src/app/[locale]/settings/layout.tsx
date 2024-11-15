@@ -16,10 +16,8 @@ export default function SettingsLayout({
         enableSystem
         disableTransitionOnChange
       >
-        <div className="flex w-full dark:bg-neutral-900">
-          <SettingsBar />
-          {children}
-        </div>
+        <SettingsBar />
+        {children}
       </ThemeProvider>
     </QueryProvider>
   );

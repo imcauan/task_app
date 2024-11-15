@@ -39,7 +39,7 @@ export function SwitchLanguage({ locale }: SwitchLanguageProps) {
 
   return (
     <Select onValueChange={handleChangeLanguage}>
-      <SelectTrigger className="border-none shadow-none">
+      <SelectTrigger className="border-none shadow-none w-fit">
         <Image
           src={`/${currentLocale?.label === "English" ? "usa" : "brazil"}.png`}
           alt="country flag"

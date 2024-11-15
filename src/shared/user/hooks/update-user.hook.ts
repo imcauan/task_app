@@ -1,24 +1,23 @@
-import { api } from "@/services/api";
+import { toast } from "@/shared/ui/hooks/use-toast";
+import { UpdateUserAction } from "@/shared/user/actions/update-user.action";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
-interface UpdateUserRequest {
-  id?: string;
-  name?: string;
-  email?: string;
-  password?: string;
-  image?: File;
-}
 
 export function useUpdateUser() {
   const queryClient = useQueryClient();
-  const UpdateUserFn = async (data: UpdateUserRequest) => {
-    const { data: updatedUser } = await api.patch(`users/${data.id}`, data);
-
-    queryClient.invalidateQueries({ queryKey: ["user"] });
-    return updatedUser;
-  };
 
   return useMutation({
-    mutationFn: UpdateUserFn,
+    mutationFn: UpdateUserAction,
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      toast({
+        title: "✅ User updated successfully",
+      });
+    },
+    onError(error) {
+      console.log(error);
+      toast({
+        title: "❌ Something went wrong while updating user",
+      });
+    },
   });
 }

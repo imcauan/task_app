@@ -105,8 +105,22 @@
       }
     },
     "settings": {
-      "profile": "Profile",
-      "subscription": "Subscription"
+      "title": "Settings",
+      "return": "Return to Workspaces",
+      "profile": {
+        "title": "Profile",
+        "theme": "Theme",
+        "language": "Language",
+        "update-user": {
+          "title": "Update user",
+          "submit": "Save informations",
+          "submit-sucessfully": "✅ User updated successfully",
+          "submit-error": "❌ Something went wrong while updating user"
+        }
+      },
+      "subscription": {
+        "title": "Subscription"
+      }
     },
     "button-actions": {
       "save": "Save",
