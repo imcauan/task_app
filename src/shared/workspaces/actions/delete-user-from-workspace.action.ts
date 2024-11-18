@@ -6,7 +6,6 @@ import { DeleteUserFromWorkspaceRequest } from "@/shared/workspaces/types/delete
 export async function DeleteUserFromWorkspace(
   data: DeleteUserFromWorkspaceRequest
 ) {
-  console.log(data);
   try {
     await api
       .post<DeleteUserFromWorkspaceRequest>(`workspace/user`, data)

@@ -1,16 +1,12 @@
-import { api } from "@/services/api";
-import { useQuery } from "@tanstack/react-query";
-import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { GetWorkspaceByIdAction } from "@/shared/workspaces/actions/get-workspace-by-id.action";
 
 export function useGetWorkspaceById(id: string) {
-  const GetWorkspaceByIdFn = async () => {
-    const { data } = await api.get<WorkspaceEntity>(`workspace/${id}`);
-
-    return data;
-  };
-
+  const queryClient = useQueryClient();
   return useQuery({
     queryKey: ["workspace"],
-    queryFn: GetWorkspaceByIdFn,
+    queryFn: () => GetWorkspaceByIdAction(id),
+    enabled: !!id,
+    initialData: () => queryClient.getQueryData(["workspace"]),
   });
 }

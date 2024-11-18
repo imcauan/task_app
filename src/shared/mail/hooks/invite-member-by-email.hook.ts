@@ -1,12 +1,15 @@
-import { api } from "@/services/api";
-import { InviteMemberRequest } from "@/shared/mail/types/invite-member-request.interface";
+import { toast } from "@/shared/ui/hooks/use-toast";
+import { InviteMemberByEmailAction } from "@/shared/mail/actions/invite-member-by-email.action";
+import { useMutation } from "@tanstack/react-query";
 
 export function useInviteMemberByEmail() {
-  const InviteMemberByEmailFn = async (data: InviteMemberRequest) => {
-    const { data: response } = await api.post("mail", data);
-
-    return response;
-  };
-
-  return { InviteMemberByEmailFn };
+  return useMutation({
+    mutationFn: InviteMemberByEmailAction,
+    onSuccess: () => {
+      toast({
+        title: "Invite sent successfully",
+        className: "bg-green-600",
+      });
+    },
+  });
 }

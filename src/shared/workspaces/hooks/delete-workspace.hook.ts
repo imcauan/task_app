@@ -1,4 +1,4 @@
-import { toast } from "@/hooks/use-toast";
+import { toast } from "@/shared/ui/hooks/use-toast";
 import { DeleteWorkspaceAction } from "@/shared/workspaces/actions/delete-workspace.action";
 import { useMutation } from "@tanstack/react-query";
 import { redirect } from "next/navigation";

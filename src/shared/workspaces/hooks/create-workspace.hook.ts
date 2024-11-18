@@ -1,4 +1,4 @@
-import { toast } from "@/hooks/use-toast";
+import { toast } from "@/shared/ui/hooks/use-toast";
 import { CreateWorkspaceAction } from "@/shared/workspaces/actions/create-workspace.action";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
