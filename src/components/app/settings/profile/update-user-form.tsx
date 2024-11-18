@@ -56,7 +56,7 @@ export function UpdateUserForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col max-w-96 h-full gap-3 bg-neutral-800 p-4 rounded-lg"
+        className="flex flex-col max-w-96 h-full gap-3 border dark:bg-neutral-800 p-4 rounded-lg"
       >
         <Title
           text={t("settings.profile.update-user.title")}
