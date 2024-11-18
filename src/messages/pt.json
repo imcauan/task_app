@@ -2,37 +2,67 @@
   "index": {
     "title": "TaskApp",
     "landing-page": {
-      "title": "A melhor ferramenta para gerenciar suas tarefas.",
-      "header": {
-        "about": "Sobre",
-        "plans": "Planos"
+      "nav": {
+        "home": "Home",
+        "features": "Features",
+        "pricing": "Planos",
+        "faqs": "FAQs",
+        "sign-up": "Registrar"
       },
-      "description": "Organize tarefas, administre prazos, e colabore com seu time.",
-      "try-now": "Experimente agora.",
-      "plans": {
-        "title": "E todos esses benefícios estão próximos de você.",
-        "description": "Escolha o melhor plano para seu negócio.",
-        "free-plan": {
+      "hero": {
+        "highlight": "🔥 Versão 1.0 está disponível!",
+        "title": "Uma nova forma de ser produtivo.",
+        "description": "Crie tarefas com facilidade, acompanhe o progresso e colabore com sua equipe em tempo real. Desde quadros Kanban intuitivos até notificações inteligentes, nosso app simplifica seu fluxo de trabalho para que você possa focar no que realmente importa. Experimente hoje mesmo e transforme a maneira como você trabalha!"
+      },
+      "features": {
+        "task": {
+          "title": "Tarefas",
+          "description": "Crie, edite e exclua tarefas facilmente para organizar suas atividades diárias. Defina prazos, adicione descrições e acompanhe o status de cada tarefa. Perfeito para manter o controle e priorizar o que é mais importante no seu dia a dia."
+        },
+        "kanban": {
+          "title": "Kanban",
+          "description": "Organize suas tarefas em um quadro Kanban intuitivo e visual. Arraste e solte tarefas entre colunas para acompanhar o progresso, personalize o fluxo de trabalho e mantenha tudo em ordem. Ideal para gerenciar projetos de forma clara e eficiente."
+        },
+        "chat": {
+          "title": "Chats",
+          "description": "Comunique-se em tempo real através de um chat integrado e intuitivo. Troque mensagens, compartilhe arquivos e colabore de forma eficiente com sua equipe ou outros usuários. Perfeito para manter a comunicação fluida e centralizada."
+        }
+      },
+      "pricing": {
+        "title": "Escolha o plano certo para você.",
+        "billed": "cobrado mensalmente",
+        "free": {
           "title": "Gratuito",
-          "description": "Para equipes menores e individual",
-          "benefits": {
-            "workspace": "1 Espaço",
-            "dashboard": "Não pode acessar a dashboard",
-            "chats": "Não pode acessar o chat"
-          }
+          "workspaces": "2 espaços de trabalho",
+          "chats": "1 chat",
+          "tasks": "Tarefas ilimitadas"
         },
-        "pro-plan": {
+        "pro": {
           "title": "Pro",
-          "description": "Para equipes maiores e organizações",
-          "benefits": {
-            "workspace": "Espaços ilimitados",
-            "dashboard": "Pode acessar a dashboard",
-            "chats": "Pode acessar o chat"
-          }
+          "workspaces": "Espaços ilimitados",
+          "chats": "Chats ilimitados",
+          "tasks": "Tarefas ilimitadas"
         },
-        "cta-plans": "Gostaria de uma avaliação gratuita? Clique aqui."
+        "cta": "Inscreva-se"
       },
-      "footer": "Feito por Cauan Diniz."
+      "faqs": {
+        "title": "Perguntas frequentes",
+        "what-is": {
+          "question": "O que é o TaskApp?",
+          "answer": "TaskApp é um aplicativo para gerenciamento de tarefas. Ele permite que vocês crie, edite e exclua tarefas, acompanhe o progresso e colabore com sua equipe de forma eficiente."
+        },
+        "what-is-kanban": {
+          "question": "O que é o Kanban?",
+          "answer": "Kanban é um sistema de gerenciamento de projetos que utiliza quadros Kanban intuitivos para organizar tarefas e acompanhar o progresso de um projeto."
+        },
+        "how-does-kanban-work": {
+          "question": "Como o Kanban funciona?",
+          "answer": "O Kanban consiste em quadros Kanban que podem ser arrastados e soltados para acompanhar o progresso de uma tarefa ou projeto."
+        }
+      },
+      "footer": {
+        "made-by": "Feito por Cauan Diniz"
+      }
     },
     "login": {
       "title": "Bem vindo de volta!",

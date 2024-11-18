@@ -2,37 +2,67 @@
   "index": {
     "title": "TaskApp",
     "landing-page": {
-      "title": "The best tool to manage your tasks",
-      "header": {
-        "about": "About",
-        "plans": "Plans"
+      "nav": {
+        "home": "Home",
+        "features": "Features",
+        "pricing": "Pricing",
+        "faqs": "FAQs",
+        "sign-up": "Sign Up"
       },
-      "description": "Organize your tasks, set deadlines, and collaborate with your team.",
-      "try-now": "Try now",
-      "plans": {
-        "title": "And all the benefits are really closer to you.",
-        "description": "Choose the best plan for your business.",
-        "free-plan": {
+      "hero": {
+        "highlight": "🔥 Version 1.0 is now available!",
+        "title": "A new way to be productive.",
+        "description": "Easily create tasks, track progress, and collaborate with your team in real-time. From intuitive Kanban boards to smart notifications, our app streamlines your workflow so you can focus on what matters most. Try it today and transform the way you work!"
+      },
+      "features": {
+        "task": {
+          "title": "Tasks",
+          "description": "Create, edit, and delete tasks effortlessly to organize your daily activities. Set deadlines, add descriptions, and track the status of each task. Perfect for staying on top of your priorities and managing your day effectively."
+        },
+        "kanban": {
+          "title": "Kanban",
+          "description": "Organize your tasks with an intuitive and visual Kanban board. Drag and drop tasks between columns to track progress, customize workflows, and keep everything in order. Ideal for managing projects clearly and efficiently."
+        },
+        "chat": {
+          "title": "Chat",
+          "description": "Communicate in real time through an integrated and intuitive chat system. Exchange messages, share files, and collaborate efficiently with your team or other users. Perfect for maintaining seamless and centralized communication."
+        }
+      },
+      "pricing": {
+        "title": "Choose the plan that's right for you.",
+        "billed": "billed monthly",
+        "free": {
           "title": "Free",
-          "description": "For small teams and individuals",
-          "benefits": {
-            "workspace": "1 workspace",
-            "dashboard": "Can't access dashboard",
-            "chats": "Can't access chats"
-          }
+          "workspaces": "2 workspaces",
+          "chats": "1 chat",
+          "tasks": "Unlimited tasks"
         },
-        "pro-plan": {
+        "pro": {
           "title": "Pro",
-          "description": "For big companies and organizations",
-          "benefits": {
-            "workspace": "Unlimited workspaces",
-            "dashboard": "Can access dashboard",
-            "chats": "Can access chats"
-          }
+          "workspaces": "Unlimited workspaces",
+          "chats": "Unlimited chats",
+          "tasks": "Unlimited tasks"
         },
-        "cta-plans": "Would you like to tryout? Click here."
+        "cta": "Subscribe"
       },
-      "footer": "Made by Cauan Diniz."
+      "faqs": {
+        "title": "FAQs",
+        "what-is": {
+          "question": "What is TaskApp?",
+          "answer": "TaskApp is a task management app that allows you to create, edit, and delete tasks. It also allows you to track the progress of your tasks and set deadlines."
+        },
+        "what-is-kanban": {
+          "question": "What is Kanban?",
+          "answer": "Kanban is a project management method that uses visual boards to visualize tasks and their progress. It helps teams stay organized and on track with their projects."
+        },
+        "how-does-kanban-work": {
+          "question": "How does Kanban work?",
+          "answer": "Kanban boards are divided into columns, each representing a stage of the project. Tasks are dragged and dropped between columns to indicate their progress."
+        }
+      },
+      "footer": {
+        "made-by": "Made by Cauan Diniz"
+      }
     },
     "login": {
       "title": "Welcome back!",

@@ -1,18 +1,23 @@
-import { LandingPageFooter } from "@/components/common/landing-page/landing-page-footer";
-import { LandingPageMain } from "@/components/common/landing-page/landing-page-main";
+"use client";
 
+import { Faq } from "@/components/common/landing/faq";
+import { Feature } from "@/components/common/landing/feature";
+import { Footer } from "@/components/common/landing/footer";
+import { Header } from "@/components/common/landing/header";
+import { Main } from "@/components/common/landing/main";
+import { Pricing } from "@/components/common/landing/pricing";
+import { Container } from "@/components/ui/container.component";
 import React from "react";
 
-export default async function Home() {
+export default function Home() {
   return (
-    <div className="w-full flex flex-col bg-white dark:bg-black">
-      <div className="flex w-full h-screen">
-        <div className="flex flex-col w-full">
-          <LandingPageMain />
-        </div>
-      </div>
-      <div className="flex h-screen items-center"></div>
-      <LandingPageFooter />
-    </div>
+    <Container className="flex flex-col items-center w-full">
+      <Header />
+      <Main />
+      <Feature />
+      <Pricing />
+      <Faq />
+      <Footer />
+    </Container>
   );
 }

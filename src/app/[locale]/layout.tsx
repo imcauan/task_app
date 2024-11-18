@@ -3,6 +3,7 @@ import "./globals.css";
 import React from "react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Providers } from "@/providers/providers";
+import { Container } from "@/components/ui/container.component";
 const inter = Inter({ subsets: ["latin"] });
 
 type Props = {
