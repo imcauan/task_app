@@ -1,6 +1,7 @@
+import { Providers } from "@/providers/providers";
+import { AppSidebar } from "@/components/common/side-bar/app-sidebar";
 import "../globals.css";
-import { QueryProvider } from "@/providers/query-provider";
-import { ThemeProvider } from "@/providers/theme-provider";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 export default function ChatLayout({
   children,
@@ -8,15 +9,9 @@ export default function ChatLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <QueryProvider>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="light"
-        enableSystem
-        disableTransitionOnChange
-      >
-        {children}
-      </ThemeProvider>
-    </QueryProvider>
+    <Providers>
+      <AppSidebar />
+      {children}
+    </Providers>
   );
 }

@@ -10,10 +10,10 @@ interface UsersScrollProps {
 }
 
 export function UsersScroll({ loggedUser, users }: UsersScrollProps) {
-  const { mutateAsync: CreateChatFn } = useCreateChat();
+  const { mutate: CreateChatFn } = useCreateChat();
 
-  const handleCreateChat = async (receiverId: string) => {
-    await CreateChatFn({
+  const handleCreateChat = (receiverId: string) => {
+    CreateChatFn({
       senderId: loggedUser?.id!,
       receiverId,
     });

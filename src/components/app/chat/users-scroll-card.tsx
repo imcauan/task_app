@@ -18,11 +18,13 @@ export function UsersScrollCard({
       className="flex w-full gap-4 items-center p-2 rounded-none border-none dark:hover:bg-neutral-900"
       onClick={props.onClick}
     >
-      <Image
+      {/* <Image
         src={`${process.env.NEXT_PUBLIC_API_URL}/${user.image}`}
         className="object-cover size-10 rounded-full"
         alt={user.name}
-      />
+        width={40}
+        height={40}
+      /> */}
       <p className="text-sm font-normal">
         {user.name === loggedUser?.name ? `${user.name} (yourself)` : user.name}
       </p>

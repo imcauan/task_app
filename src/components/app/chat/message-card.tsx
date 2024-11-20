@@ -12,9 +12,8 @@ const card = tv({
   base: "p-2 text-sm max-w-60 rounded text-justify",
   variants: {
     color: {
-      primary: "bg-black text-white dark:bg-white dark:text-black",
-      secondary:
-        "bg-neutral-200 dark:bg-neutral-800 text-black dark:text-white",
+      primary: "bg-gradient-to-r from-amber-400 to-indigo-600 text-white",
+      secondary: "bg-black/50 dark:bg-white/30 dark:bg-neutral-800 text-white",
     },
   },
 });

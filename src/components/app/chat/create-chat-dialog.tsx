@@ -26,11 +26,11 @@ export function CreateChatDialog({ users }: CreateChatDialogProps) {
 
   return (
     <Dialog>
-      <DialogTrigger className="text-xs flex gap-2">
+      <DialogTrigger className="text-xs flex gap-2 bg-gradient-to-r from-amber-400 to-indigo-600 p-2 text-white rounded-xl">
         <FaPlus />
         New
       </DialogTrigger>
-      <DialogContent className="dark:bg-black">
+      <DialogContent className="dark:bg-neutral-900">
         <DialogHeader>
           <DialogTitle>First of all, search a user.</DialogTitle>
         </DialogHeader>

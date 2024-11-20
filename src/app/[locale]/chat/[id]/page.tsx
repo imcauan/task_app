@@ -26,11 +26,9 @@ export default function Page() {
 
   const [isTyping, setIsTyping] = React.useState<boolean>(false);
 
-  // TODO: handle image for messaging
-
   return (
-    <div className="w-full h-dvh lg:h-screen flex dark:bg-black">
-      <Chatbar user={user!} />
+    <div className="w-full h-dvh lg:h-screen flex dark:bg-neutral-900">
+      <Chatbar />
       <div className="w-full h-full flex flex-col justify-between">
         <ChatHeader user={receiverUser!} isTyping={isTyping} />
         <MessageList messages={messages ?? []} loggedUser={user!} />
