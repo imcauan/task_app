@@ -23,6 +23,7 @@ import { TaskPriority } from "@/shared/tasks/enums/task-priority.enum";
 import { TaskMemberSelect } from "@/components/app/workspaces/task-member-select";
 import { WorkspaceMember } from "@/shared/workspaces/types/workspace-member.type";
 import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";
+import { UserEntity } from "@/shared/user/types/user.entity";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name cannot be empty!" }),
@@ -36,8 +37,8 @@ interface CreateTaskDialogProps extends React.ComponentProps<"dialog"> {
   columnId: string;
   setTasks: React.Dispatch<React.SetStateAction<TaskEntity[]>>;
   workspace?: WorkspaceEntity;
-  setSelected: React.Dispatch<React.SetStateAction<TaskPriority>>;
-  selected: TaskPriority;
+  setSelectedPriority: React.Dispatch<React.SetStateAction<TaskPriority>>;
+  selectedPriority: TaskPriority;
 }
 
 export function CreateTaskDialog({
@@ -45,18 +46,16 @@ export function CreateTaskDialog({
   workspace,
   columnId,
   setTasks,
-  selected,
-  setSelected,
+  selectedPriority,
+  setSelectedPriority,
   ...props
 }: CreateTaskDialogProps) {
   const t = useTranslations("index");
   const { mutateAsync: CreateTaskFn } = useCreateTask();
 
-  const members = workspace?.members.map((member) => ({
-    id: member.id,
-    image: member.image?.name,
-    name: member.name,
-  }));
+  const [selectedMembers, setSelectedMembers] = React.useState<UserEntity[]>(
+    []
+  );
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -68,16 +67,13 @@ export function CreateTaskDialog({
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log();
-
     const task = await CreateTaskFn({
       name: data.name,
       description: data.description,
-      user_id: userId,
       workspaceId: workspace?.id,
       columnId,
-      priority: selected,
-      members: data.members,
+      priority: selectedPriority,
+      members: selectedMembers,
     });
 
     setTasks((prev) => [...(prev ?? []), task]);
@@ -111,15 +107,17 @@ export function CreateTaskDialog({
               form={form}
               name="priority"
               label={t("workspace.kanban.create-task-form.priority")}
-              selected={selected}
-              setSelected={setSelected}
+              selectedPriority={selectedPriority}
+              setSelectedPriority={setSelectedPriority}
             />
             {workspace && workspace?.members.length > 1 && (
               <TaskMemberSelect
                 form={form}
                 name="members"
                 label={t("workspace.kanban.create-task-form.members")}
-                members={members || []}
+                members={workspace.members || []}
+                selectedMembers={selectedMembers}
+                setSelectedMembers={setSelectedMembers}
               />
             )}
             <DialogFooter className="w-full flex justify-end gap-4">

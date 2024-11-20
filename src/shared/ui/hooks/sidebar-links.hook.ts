@@ -2,7 +2,6 @@ import { IconType } from "react-icons/lib";
 import { MdLogout, MdSend, MdSettings } from "react-icons/md";
 import { useLogout } from "@/shared/auth/hooks/logout.hook";
 import { BsPeopleFill } from "react-icons/bs";
-import { HiArrowTrendingUp } from "react-icons/hi2";
 import { useLocale } from "next-intl";
 
 export interface LinkEntity {
@@ -12,24 +11,25 @@ export interface LinkEntity {
   onClick?: () => void;
 }
 export function useSidebarLinks() {
+  const locale = useLocale();
   const links: LinkEntity[] = [
     {
-      href: `workspaces`,
+      href: `/${locale}/workspaces`,
       icon: BsPeopleFill,
       text: "Workspaces",
     },
     {
-      href: `chat`,
+      href: `/${locale}/chat`,
       icon: MdSend,
       text: "Chats",
     },
     {
-      href: `settings`,
+      href: `/${locale}/settings`,
       icon: MdSettings,
       text: "Settings",
     },
     {
-      href: `login`,
+      href: `/${locale}/login`,
       icon: MdLogout,
       text: "Logout",
       onClick: useLogout,

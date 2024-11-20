@@ -7,7 +7,7 @@ interface KanbanTaskCardPriorityProps {
 }
 
 const variants = tv({
-  base: "w-fit p-2 rounded-xl text-white dark:text-black",
+  base: "w-fit p-2 rounded-xl text-black dark:text-white",
   variants: {
     priority: {
       High: "bg-red-300",

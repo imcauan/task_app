@@ -24,7 +24,7 @@ export function InviteMemberForm({
   workspace,
   ...props
 }: InviteMemberFormProps) {
-  const { InviteMemberByEmailFn } = useInviteMemberByEmail();
+  const { mutate: InviteMemberByEmailFn } = useInviteMemberByEmail();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,7 +33,7 @@ export function InviteMemberForm({
   });
 
   const onSubmit = async ({ email }: z.infer<typeof formSchema>) => {
-    await InviteMemberByEmailFn({
+    InviteMemberByEmailFn({
       email,
       username: name,
       workspaceName: workspace.name,

@@ -6,14 +6,16 @@ import { useUser } from "@/shared/auth/hooks/user.hook";
 import { KanbanBoard } from "@/components/app/workspaces/kanban-board";
 import { RoundSpinner } from "@/components/ui/spinner";
 import React from "react";
-import { TaskEntity } from "@/shared/tasks/types/task.entity";
 import { Container } from "@/components/ui/container.component";
 
-export default function Page({ params }: { params: { id: string } }) {
-  const { id } = params;
-  const { isLoading, data: workspace } = useGetWorkspaceById(id);
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) {
+  const id = searchParams["id"] ?? "";
   const { data: user } = useUser();
-  const [tasks, setTasks] = React.useState<TaskEntity[]>(user?.tasks!);
+  const { isLoading, data: workspace } = useGetWorkspaceById(id);
 
   return (
     <Container className="w-full h-dvh lg:h-screen flex">
@@ -25,13 +27,7 @@ export default function Page({ params }: { params: { id: string } }) {
         <Container className="flex flex-col h-full w-full">
           <WorkspaceHeader workspace={workspace!} />
           <Container className="w-full flex gap-4  h-full">
-            <KanbanBoard
-              tasks={tasks!}
-              setTasks={setTasks}
-              columns={workspace?.columns!}
-              userId={user?.id!}
-              workspace={workspace!}
-            />
+            <KanbanBoard userId={user?.id!} workspace={workspace!} />
           </Container>
         </Container>
       )}

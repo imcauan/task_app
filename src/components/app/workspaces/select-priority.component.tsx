@@ -23,16 +23,16 @@ export interface SelectPriorityProps<T extends FieldValues>
   form: UseFormReturn<T>;
   name: Path<T>;
   label?: string;
-  setSelected: React.Dispatch<React.SetStateAction<TaskPriority>>;
-  selected: TaskPriority;
+  setSelectedPriority: React.Dispatch<React.SetStateAction<TaskPriority>>;
+  selectedPriority: TaskPriority;
 }
 
 export function SelectPriority<T extends FieldValues>({
   form,
   name,
   label,
-  setSelected,
-  selected,
+  setSelectedPriority,
+  selectedPriority,
 }: SelectPriorityProps<T>) {
   const t = useTranslations("index");
   const priorities = [
@@ -61,11 +61,13 @@ export function SelectPriority<T extends FieldValues>({
           </FormLabel>
           <FormControl>
             <Select
-              onValueChange={(e) => setSelected(e as TaskPriority)}
+              onValueChange={(e) => setSelectedPriority(e as TaskPriority)}
               {...field}
-              value={selected}
+              value={selectedPriority}
             >
-              <SelectTrigger className="shadow-none">{selected}</SelectTrigger>
+              <SelectTrigger className="shadow-none">
+                {selectedPriority}
+              </SelectTrigger>
               <SelectContent className="dark:bg-neutral-800 dark:hover:bg-neutral-900">
                 {priorities.map((priority) => (
                   <SelectItem

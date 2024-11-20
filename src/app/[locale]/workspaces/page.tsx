@@ -16,7 +16,10 @@ export default function Page() {
         <Container className="grid grid-cols-1 lg:grid-cols-2 w-full">
           {user &&
             user.workspaces.map((workspace) => (
-              <Link href={`workspaces/${workspace.id}`} key={workspace.id}>
+              <Link
+                href={`workspaces/workspace?id=${workspace.id}`}
+                key={workspace.id}
+              >
                 <WorkspaceCard workspace={workspace} />
               </Link>
             ))}

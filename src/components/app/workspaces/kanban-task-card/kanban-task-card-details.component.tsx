@@ -31,11 +31,11 @@ export function KanbanTaskCardDetails({
         <DialogTitle>{task.name}</DialogTitle>
         <p>{task.description}</p>
         <KanbanTaskCardPriority priority={task.priority} />
-        {task?.members?.length! > 1 && <KanbanTaskCardMembers task={task} />}
+        <KanbanTaskCardMembers task={task} />
         <DialogFooter>
           <DialogClose
             onClick={onDelete}
-            className="p-2 text-white rounded-xl font-semibold text-sm"
+            className="p-2 text-white rounded-xl font-semibold text-sm bg-gradient-to-r from-amber-400 to-indigo-600"
           >
             {t("workspace.kanban.task-details.delete")}
           </DialogClose>

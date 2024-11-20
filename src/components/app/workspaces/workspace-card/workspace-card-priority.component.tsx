@@ -1,16 +1,33 @@
+import { WorkspacePriority } from "@/shared/workspaces/enums/workspace-priority.enum";
 import React from "react";
+import { tv } from "tailwind-variants";
 
 interface WorkspaceCardPriorityProps {
-  priority: string;
+  priority: WorkspacePriority;
 }
+
+const variants = tv({
+  base: "w-fit p-2 rounded-xl dark:text-black",
+  variants: {
+    priority: {
+      High: "bg-red-300",
+      Medium: "bg-yellow-200",
+      Low: "bg-green-300",
+    },
+  },
+});
 
 export function WorkspaceCardPriority({
   priority,
 }: WorkspaceCardPriorityProps) {
   return (
     <React.Fragment>
-      <p className="text-xs text-white p-2 rounded-full bg-red-300">
-        {priority}
+      <p
+        className={variants({
+          priority,
+        })}
+      >
+        {priority}{" "}
       </p>
     </React.Fragment>
   );

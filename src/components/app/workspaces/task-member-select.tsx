@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/command";
 import { Command as CommandPrimitive } from "cmdk";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { WorkspaceMember } from "@/shared/workspaces/types/workspace-member.type";
 import {
   FormControl,
   FormField,
@@ -20,13 +19,16 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { UserEntity } from "@/shared/user/types/user.entity";
 
 interface TaskMemberSelectProps<T extends FieldValues>
   extends Omit<React.ComponentProps<"select">, "form"> {
   name: Path<T>;
   label?: string;
   form: UseFormReturn<T>;
-  members: WorkspaceMember[];
+  members: UserEntity[];
+  selectedMembers: UserEntity[];
+  setSelectedMembers: React.Dispatch<React.SetStateAction<UserEntity[]>>;
 }
 
 export function TaskMemberSelect<T extends FieldValues>({
@@ -34,17 +36,19 @@ export function TaskMemberSelect<T extends FieldValues>({
   label,
   form,
   members,
+  selectedMembers,
+  setSelectedMembers,
 }: TaskMemberSelectProps<T>) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState<WorkspaceMember[]>([
-    members[0],
-  ]);
   const [inputValue, setInputValue] = React.useState("");
 
-  const handleUnselect = React.useCallback((member: WorkspaceMember) => {
-    setSelected((prev) => prev.filter((s) => s.id !== member.id));
-  }, []);
+  const handleUnselect = React.useCallback(
+    (member: UserEntity) => {
+      setSelectedMembers((prev) => prev.filter((s) => s.id !== member.id));
+    },
+    [setSelectedMembers]
+  );
 
   const handleKeyDown = React.useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -52,7 +56,7 @@ export function TaskMemberSelect<T extends FieldValues>({
       if (input) {
         if (e.key === "Delete" || e.key === "Backspace") {
           if (input.value === "") {
-            setSelected((prev) => {
+            setSelectedMembers((prev) => {
               const newSelected = [...prev];
               newSelected.pop();
               return newSelected;
@@ -64,12 +68,12 @@ export function TaskMemberSelect<T extends FieldValues>({
         }
       }
     },
-    []
+    [setSelectedMembers]
   );
 
-  const selectables = members.filter((member) => !selected.includes(member));
-
-  console.log(selectables, selected, inputValue);
+  const selectables = members.filter(
+    (member) => !selectedMembers.includes(member)
+  );
 
   return (
     <FormField
@@ -88,7 +92,7 @@ export function TaskMemberSelect<T extends FieldValues>({
             >
               <div className="group rounded-md border border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
                 <div className="flex flex-wrap gap-1">
-                  {selected.map((member) => {
+                  {selectedMembers.map((member) => {
                     return (
                       <Badge key={member.id} variant="secondary">
                         {member.name}
@@ -136,7 +140,7 @@ export function TaskMemberSelect<T extends FieldValues>({
                               }}
                               onSelect={(value) => {
                                 setInputValue("");
-                                setSelected((prev) => [...prev, member]);
+                                setSelectedMembers((prev) => [...prev, member]);
                               }}
                               className={"cursor-pointer"}
                             >

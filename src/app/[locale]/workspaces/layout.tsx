@@ -1,4 +1,4 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import "../globals.css";
 import { QueryProvider } from "@/providers/query-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -19,7 +19,6 @@ export default function WorkspaceLayout({
       >
         <SidebarProvider>
           <AppSidebar />
-          <SidebarTrigger />
           {children}
         </SidebarProvider>
       </ThemeProvider>

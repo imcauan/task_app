@@ -8,7 +8,7 @@ interface KanbanTaskCardMembersProps {
 }
 
 export function KanbanTaskCardMembers({ task }: KanbanTaskCardMembersProps) {
-  const avatarUrls = task.members?.map((member) => member.image) || [];
+  const avatarUrls = task.members?.map((member) => member.image) ?? [];
   const t = useTranslations("index");
 
   return (
