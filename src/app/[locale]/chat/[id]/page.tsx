@@ -8,7 +8,7 @@ import { useGetUserById } from "@/shared/user/hooks/get-user-by-id.hook";
 import { useUser } from "@/shared/auth/hooks/user.hook";
 import { useGetMessagesByChatId } from "@/shared/messages/hooks/get-messages-by-chat-id.hook";
 import { Chatbar } from "@/components/app/chat/chat-bar";
-import { ChatHeader } from "@/components/app/auth/chat-header";
+import { ChatHeader } from "@/components/app/chat/chat-header";
 import { MessageInput } from "@/components/app/chat/message-input";
 import { MessageList } from "@/components/app/chat/message-list";
 
