@@ -1,8 +1,7 @@
 "use client";
 
 import SettingsWorkspaceHeader from "@/components/app/workspaces/settings/settings-workspace-header";
-import WorkspaceManagement from "@/components/app/workspaces/settings/workspace-management";
-import { Button } from "@/components/ui/button";
+import { WorkspaceManagement } from "@/components/app/workspaces/settings/workspace-management";
 import { Container } from "@/components/ui/container.component";
 import { useGetWorkspaceById } from "@/shared/workspaces/hooks/get-workspace-by-id.hook";
 import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";

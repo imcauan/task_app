@@ -1,5 +1,4 @@
 import { AddMemberDialog } from "@/components/app/workspaces/add-member-dialog";
-import { InviteMemberForm } from "@/components/app/workspaces/invite-member-form";
 import WorkspaceManagementActions from "@/components/app/workspaces/settings/workspace-management-actions";
 import { WorkspaceMembersTable } from "@/components/app/workspaces/settings/workspace-members-table";
 import { Container } from "@/components/ui/container.component";
@@ -12,9 +11,7 @@ interface WorkspaceManagementProps {
   workspace: WorkspaceEntity;
 }
 
-export default function WorkspaceManagement({
-  workspace,
-}: WorkspaceManagementProps) {
+export function WorkspaceManagement({ workspace }: WorkspaceManagementProps) {
   const columns = useGetMembersTableColumns();
   const { data: user } = useUser();
 
