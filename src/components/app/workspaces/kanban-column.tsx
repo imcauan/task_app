@@ -12,6 +12,7 @@ import { useDeleteTask } from "@/shared/tasks/hooks/delete-task.hook";
 import { TaskEntity } from "@/shared/tasks/types/task.entity";
 import { TaskPriority } from "@/shared/tasks/enums/task-priority.enum";
 import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";
+import { PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 
 interface KanbanColumnProps {
   userId: string;
@@ -33,7 +34,7 @@ export function KanbanColumn({
   deleteColumn,
 }: KanbanColumnProps) {
   const [title, setTitle] = React.useState<string>(column.title);
-  const [selected, setSelected] = React.useState<TaskPriority>(
+  const [selectedPriority, setSelectedPriority] = React.useState<TaskPriority>(
     TaskPriority.LOW
   );
   const [editMode, setEditMode] = React.useState<boolean>(false);
@@ -113,7 +114,7 @@ export function KanbanColumn({
         </div>
         <Separator />
       </div>
-      <div className="p-3 flex flex-col gap-3 w-full h-full overflow-x-hidden overflow-y-auto ">
+      <div className="p-4 flex flex-col gap-3 w-full h-full overflow-x-hidden overflow-y-auto ">
         {tasksIds && (
           <SortableContext items={tasksIds}>
             {tasks?.map((task) => (
@@ -134,8 +135,8 @@ export function KanbanColumn({
           columnId={column.id}
           workspace={workspace}
           setTasks={setTasks}
-          selected={selected}
-          setSelected={setSelected}
+          selectedPriority={selectedPriority}
+          setSelectedPriority={setSelectedPriority}
         />
       </div>
     </div>

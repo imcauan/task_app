@@ -23,35 +23,17 @@ import { TaskEntity } from "@/shared/tasks/types/task.entity";
 import { KanbanTaskCard } from "@/components/app/workspaces/kanban-task-card/kanban-task-card";
 import { useDeleteTask } from "@/shared/tasks/hooks/delete-task.hook";
 import { useUpdateUserColumns } from "@/shared/column/hooks/update-user-columns.hook";
-import { useUpdateColumnTasks } from "@/shared/column/hooks/update-column-tasks.hook";
+
 import { useTranslations } from "next-intl";
 import { WorkspaceEntity } from "@/shared/workspaces/types/workspace.entity";
-
-// TODO: add task atributions
+import { useUpdateColumnTasks } from "@/shared/workspaces/hooks/update-column-tasks.hook";
 interface KanbanBoardProps {
-  columns: ColumnEntity[] | undefined;
-  tasks: TaskEntity[] | undefined;
-  setTasks: React.Dispatch<React.SetStateAction<TaskEntity[]>>;
   workspace: WorkspaceEntity;
   userId: string;
 }
 
-export function KanbanBoard({
-  columns,
-  userId,
-  tasks,
-  setTasks,
-  workspace,
-}: KanbanBoardProps) {
-  const [cols, setCols] = React.useState<ColumnEntity[] | null>(columns!);
+export function KanbanBoard({ userId, workspace }: KanbanBoardProps) {
   const t = useTranslations("index");
-
-  const [activeTask, setActiveTask] = React.useState<TaskEntity | null>(null);
-  const [activeColumn, setActiveColumn] = React.useState<ColumnEntity | null>(
-    null
-  );
-
-  // TODO: fix tasks column update
 
   const { mutateAsync: createColumnFn } = useCreateColumn();
   const { mutateAsync: deleteColumnFn } = useDeleteColumn();
@@ -59,6 +41,17 @@ export function KanbanBoard({
   const { mutate: updateColumnTasksFn } = useUpdateColumnTasks();
   const { mutate: updateUserColumnFn } = useUpdateUserColumns();
   const { mutate: deleteTaskFn } = useDeleteTask();
+
+  const [columns, setColumns] = React.useState<ColumnEntity[]>(
+    workspace?.columns!
+  );
+
+  const [tasks, setTasks] = React.useState<TaskEntity[]>(workspace?.tasks!);
+
+  const [activeTask, setActiveTask] = React.useState<TaskEntity | null>(null);
+  const [activeColumn, setActiveColumn] = React.useState<ColumnEntity | null>(
+    null
+  );
 
   const columnsId = React.useMemo(
     () => columns?.map((col) => col.id),
@@ -68,10 +61,12 @@ export function KanbanBoard({
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 3,
+        distance: 5,
+        delay: 2000,
       },
     })
   );
+
   return (
     <div className="flex w-full gap-4 overflow-x-visible overflow-y- p-4">
       <DndContext
@@ -81,21 +76,17 @@ export function KanbanBoard({
         onDragOver={onDragOver}
       >
         <div>
-          <div className="flex gap-4 items-center h-full overflow-x-auto">
+          <div className="flex gap-10 items-center h-full overflow-x-auto">
             <SortableContext items={columnsId as string[]}>
-              {cols ? (
-                cols.map((t) => (
+              {columns ? (
+                columns.map((t) => (
                   <KanbanColumn
                     userId={userId}
                     workspace={workspace}
                     column={t}
                     key={t.id}
                     setTasks={setTasks}
-                    tasks={
-                      tasks?.filter(
-                        (task) => task.column_id === t.id
-                      ) as TaskEntity[]
-                    }
+                    tasks={tasks?.filter((task) => task.column_id === t.id)}
                     deleteColumn={deleteColumn}
                     updateColumn={updateColumn}
                   />
@@ -146,24 +137,24 @@ export function KanbanBoard({
       workspaceId: workspace.id,
     });
 
-    setCols((prev) => [...prev!, column]);
+    setColumns((prev) => [...prev!, column as ColumnEntity]);
   }
 
   async function deleteColumn(id: string) {
     await deleteColumnFn(id);
 
-    setCols((prev) => prev!?.filter((p) => p.id !== id));
+    setColumns((prev) => prev!?.filter((p) => p.id !== id));
   }
 
   async function updateColumn(id: string, title: string) {
-    const { id: updatedColumnId } = await updateColumnFn({ id, title });
+    const updatedColumn = await updateColumnFn({ id, title });
 
-    const updatedColumns = cols?.map((col) => {
-      if (col.id !== updatedColumnId) return col;
+    const updatedColumns = columns?.map((col) => {
+      if (col.id !== updatedColumn?.id) return col;
       return { ...col, title };
     });
 
-    setCols(updatedColumns!);
+    setColumns(updatedColumns!);
   }
 
   function onDragStart(ev: DragStartEvent) {
@@ -196,12 +187,12 @@ export function KanbanBoard({
     const overColumnIndex = columns?.findIndex((c) => c.id === overColumnId);
 
     const updatedColumns = arrayMove(
-      cols as ColumnEntity[],
+      columns as ColumnEntity[],
       activeColumnIndex as number,
       overColumnIndex as number
-    );
+    ) as ColumnEntity[];
 
-    setCols(updatedColumns);
+    setColumns(updatedColumns);
 
     const columnsToUpdate = updatedColumns?.map((col, index) => ({
       id: col.id,
@@ -215,68 +206,63 @@ export function KanbanBoard({
     const { active, over } = ev;
     if (!over) return;
 
-    const columnId = active?.data.current?.task?.column_id;
-
-    const columnToUpdate = columns?.find((c) => c.id === columnId)!;
-    const { id, tasks } = columnToUpdate ?? [];
-
     const activeId = active.id;
     const overId = over.id;
+
+    if (activeId === overId) return;
 
     const existsActiveTask = active.data.current?.type === "Task";
     const existsOverTask = over.data.current?.type === "Task";
 
-    const activeTaskIndex = tasks?.findIndex((t) => t.id === activeId);
-    const overTaskIndex = tasks?.findIndex((t) => t.id === overId);
+    if (!existsActiveTask) return;
 
+    // Dropping a task over another task
     if (existsActiveTask && existsOverTask) {
+      const activeIndex = tasks?.findIndex((t) => t.id === activeId);
+      const overIndex = tasks?.findIndex((t) => t.id === overId);
       const updatedTasks = arrayMove(
-        tasks as TaskEntity[],
-        activeTaskIndex as number,
-        overTaskIndex as number
+        tasks!,
+        activeIndex as number,
+        overIndex as number
       );
 
-      const tasksToUpdate = updatedTasks.map((t, index) => ({
-        id: t.id,
-        order: index,
-      }));
+      setTasks(updatedTasks);
 
       updateColumnTasksFn({
-        id,
-        tasks: tasksToUpdate,
-      });
-
-      setTasks((tasks) => {
-        tasks![activeTaskIndex as number].column_id =
-          tasks![overTaskIndex as number].column_id;
-
-        return updatedTasks;
+        id: workspace.id,
+        tasks: updatedTasks.map((task, index) => ({
+          id: task.id,
+          name: task.name,
+          order: index,
+          columnId: task.column_id,
+        })),
       });
     }
 
-    const isOverAColumn = over.data.current?.type === "Column";
+    // Dropping a task over a column
+    const existsOverColumn = over.data.current?.type === "Column";
 
-    console.log(`overId => ${overId}`);
-    console.log(`isOverAColumn => ${isOverAColumn}`);
+    if (existsActiveTask && existsOverColumn) {
+      const activeIndex = tasks?.findIndex((t) => t.id === activeId);
 
-    // --------------------------------------------------
-    if (existsActiveTask && isOverAColumn) {
-      setTasks((tasks) => {
-        const activeIndex = tasks.findIndex((t) => t.id === activeId);
-        tasks![activeIndex].column_id = overId as string;
+      const updatedTasks = arrayMove(
+        tasks!,
+        activeIndex as number,
+        activeIndex as number
+      ) as TaskEntity[];
 
-        const updatedTasks = arrayMove(tasks, activeTaskIndex, activeTaskIndex);
+      updatedTasks[activeIndex].column_id = overId as string;
 
-        updateColumnTasksFn({
-          id,
-          tasks: updatedTasks.map((t, index) => ({
-            id: t.id,
-            order: index,
-            columnId: t.column_id,
-          })),
-        });
+      setTasks(updatedTasks);
 
-        return updatedTasks;
+      updateColumnTasksFn({
+        id: workspace.id,
+        tasks: updatedTasks.map((task, index) => ({
+          id: task.id,
+          name: task.name,
+          order: index,
+          columnId: task.column_id,
+        })),
       });
     }
   }

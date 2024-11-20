@@ -16,12 +16,7 @@ export async function Providers({ children }: ProvidersProps) {
 
   return (
     <QueryProvider>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="light"
-        enableSystem
-        disableTransitionOnChange
-      >
+      <ThemeProvider attribute="class" enableSystem disableTransitionOnChange>
         <NextIntlClientProvider messages={messages}>
           <TooltipProvider>
             <SidebarProvider>

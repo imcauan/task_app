@@ -108,6 +108,16 @@
       },
       "kanban": {
         "create-column": "Adicionar coluna",
+        "create-column-success": "✅ Coluna criada com sucesso",
+        "create-column-fail": "❌ Falha ao criar coluna",
+        "update-column-success": "✅ Coluna atualizada com sucesso",
+        "update-column-fail": "❌ Falha ao atualizar coluna",
+        "update-user-columns-success": "✅ Suas colunas foram atualizadas com sucesso",
+        "update-user-columns-fail": "❌ Falha ao atualizar suas colunas",
+        "delete-column-success": "✅ Coluna excluída com sucesso",
+        "delete-column-fail": "❌ Falha ao excluir coluna",
+        "update-column-tasks-success": "✅ Tarefas atualizadas com sucesso",
+        "update-column-tasks-fail": "❌ Falha ao atualizar tarefas",
         "create-task": "Criar uma nova tarefa",
         "create-task-form": {
           "name": "Name",

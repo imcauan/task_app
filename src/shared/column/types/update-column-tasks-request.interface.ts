@@ -5,6 +5,7 @@ export interface UpdateColumnTasksRequest {
 
 export type TasksToUpdate = {
   id: string;
+  name: string;
   order: number;
   columnId?: string;
 };

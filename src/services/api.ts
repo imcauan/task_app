@@ -16,3 +16,13 @@ api.interceptors.request.use((config) => {
 
   return config;
 });
+
+api.interceptors.response.use(undefined, (error) => {
+  if (error === "403") {
+    console.log("Forbidden error");
+  }
+
+  if (error === "500") {
+    console.log("Internal server error");
+  }
+});

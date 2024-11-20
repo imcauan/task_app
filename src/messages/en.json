@@ -109,7 +109,17 @@
       },
       "kanban": {
         "create-column": "Add column",
+        "create-column-success": "✅ Column has been created successfully",
+        "create-column-fail": "❌ Failed to create column",
+        "update-column-success": "✅ Column has been updated successfully",
+        "update-column-fail": "❌ Failed to update column",
+        "update-user-columns-success": "✅ Your columns have been updated successfully",
+        "update-user-columns-fail": "❌ Failed to update your columns",
+        "delete-column-success": "✅ Column has been deleted successfully",
+        "delete-column-fail": "❌ Failed to delete column",
         "create-task": "Create a new task",
+        "update-column-tasks-success": "✅ Tasks have been updated successfully",
+        "update-column-tasks-fail": "❌ Failed to update tasks",
         "create-task-form": {
           "name": "Name",
           "description": "Description",

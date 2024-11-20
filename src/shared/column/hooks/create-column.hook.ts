@@ -1,20 +1,24 @@
-import { api } from "@/services/api";
-import { CreateColumnRequest } from "@/shared/column/types/create-column-request.interface";
-import { ColumnEntity } from "../types/column.entity";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { CreateColumnAction } from "@/shared/column/actions/create-column.action";
+import { toast } from "@/shared/ui/hooks/use-toast";
+import { useTranslations } from "next-intl";
 
 export function useCreateColumn() {
   const queryClient = useQueryClient();
-  const CreateColumnFn = async (data: CreateColumnRequest) => {
-    const { data: column } = await api.post<ColumnEntity>("column", data);
-
-    return column as ColumnEntity;
-  };
+  const t = useTranslations("index");
 
   return useMutation({
-    mutationFn: CreateColumnFn,
+    mutationFn: CreateColumnAction,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["workspace"] });
+      toast({
+        title: t("workspace.kanban.create-column-success"),
+      });
+    },
+    onError() {
+      toast({
+        title: t("workspace.kanban.create-column-fail"),
+      });
     },
   });
 }
