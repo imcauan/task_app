@@ -12,8 +12,7 @@ export function useGetChatById(id: string) {
   return useQuery({
     queryKey: ["chat"],
     queryFn: GetChatByIdFn,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
+    enabled: !!id,
+    refetchInterval: 1000,
   });
 }
